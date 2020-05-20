@@ -1,6 +1,6 @@
 # UNQTrading
 ---
-### Proyecto para Elementos de Ingeniería de Software - 2019
+### Proyecto para Elementos de Ingeniería de Software - 2020
 
 ## Integrantes
 
@@ -11,3 +11,6 @@
 |Andres Mora|	andeehr|	andeehr@gmail.com|
 |Gaston Goffredo|	ggoffredo|	gaston.goffredo@alu.unq.edu.ar|
 |Juan Cruz Vincenti|	jcvincenti|	juancruzvincenti@gmail.com|
+
+## Backlog
+##### [Backlog Trello](https://trello.com/b/AvjqwmzW/unqtrading "Backlog Trello")
