@@ -1,4 +1,4 @@
-package ar.unq.unqtrading.UNQTrading
+package ar.unq.unqtrading
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
