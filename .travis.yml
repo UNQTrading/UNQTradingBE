@@ -1,0 +1,10 @@
+language: java
+branches:
+  only:
+  - master
+before_install:
+    - cd java/
+install:
+    - ./gradlew assemble
+script:
+    - ./gradlew check 
