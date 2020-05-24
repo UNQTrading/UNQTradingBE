@@ -1,10 +1,32 @@
+notifications:
+  email: true
+
 language: java
+
 branches:
   only:
   - master
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+
 before_install:
-    - cd java/
+  - chmod +x gradlew
+  - sudo mysql -e "UPDATE mysql.user SET authentication_string=PASSWORD('root') WHERE User='root';"
+  - sudo service mysql restart
+
 install:
-    - ./gradlew assemble
+  - ./gradlew assemble
+
+before_script:
+  - mysql -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS unqtrading;'
+
 script:
-    - ./gradlew check 
+  - ./gradlew check --debug --info
