@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button, Form, Col } from 'react-bootstrap';
 
 export default class Test extends Component {
 
@@ -28,9 +29,16 @@ export default class Test extends Component {
 
     render() {
         return (
+
         <div>
-            <input onChange={event => this.handleChange(event.target.value, 'testField')}></input>
-            <button type="submit" onClick={ev => this.sent(ev)}>Enviar</button>
+        <Form>
+          <Form.Row>
+            <Col>
+              <Form.Control placeholder="Ingrese texto de prueba" onChange={event => this.handleChange(event.target.value, 'testField')} />
+            </Col>
+            <Button variant="primary" onClick={ev => this.sent(ev)}>Enviar</Button>{' '}
+          </Form.Row>
+        </Form>
         </div>
             );
     }
