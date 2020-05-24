@@ -30,6 +30,7 @@ class TestEntityController {
      * La anotacion @RequestParam se usa para definir parametros del request, esta anotacion se pone antes del parametro del metodo que queremos
      * que sea parametro del request
      */
+
     @PostMapping(value= ["/save"], consumes= [MediaType.APPLICATION_JSON_VALUE], produces= [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     @ResponseStatus(value= HttpStatus.CREATED)
