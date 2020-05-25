@@ -1,46 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from 'axios';
-import { Button, Form, Col } from 'react-bootstrap';
+import { Button, Form, Col, Container } from 'react-bootstrap';
 
-export default class Test extends Component {
+export default function Test() {
+    /*
+     * El useState devuelve una pareja de valores: el estado actual
+     * y una función que lo actualiza. Por eso escribimos
+     * const [testField, handleChange] = useState().
+     */
+    const [testField, handleChange] = useState('');
 
-        constructor(props) {
-            super(props);
-            this.state = {
-                testField: ''
-            };
-            this.handleChange = this.handleChange.bind(this);
-        }
-
-    handleChange(value, prop) {
-        this.setState(prevState => ({ ...prevState, [prop]: value }));
-    }
-
-    sent = (ev) => {
-    axios.post(`http://localhost:8080/api/test/save`, {
-                                        id: 1,
-                                        testField: this.state.testField
-                                    }).then((response) => {
-                                        alert("ok")
-                                    }).catch((error) => {
-                                        alert("fail")
-                                    })
-                        }
-
-    render() {
-        return (
-
+    return (
         <div>
-        <Form>
-          <Form.Row>
-            <Col>
-              <Form.Control placeholder="Ingrese texto de prueba" onChange={event => this.handleChange(event.target.value, 'testField')} />
-            </Col>
-            <Button variant="primary" onClick={ev => this.sent(ev)}>Enviar</Button>{' '}
-          </Form.Row>
-        </Form>
+            <Container>
+                <Form>
+                    <Form.Row>
+                        <Col>
+                            <Form.Control placeholder="Ingrese texto de prueba" onChange={event => handleChange(event.target.value)} />
+                        </Col>
+                        <Button variant="primary" onClick={ev => sent(testField)}>Enviar</Button>{' '}
+                    </Form.Row>
+                </Form>
+            </Container>
         </div>
-            );
-    }
+    );
 }
 
+function sent(testField) {
+    axios.post(`http://localhost:8080/api/test/save`, {
+        id: null,
+        testField: testField
+    }).then((response) => {
+        alert("ok")
+    }).catch((error) => {
+        alert("fail")
+    })
+}
