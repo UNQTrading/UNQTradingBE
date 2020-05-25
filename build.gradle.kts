@@ -25,6 +25,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	testImplementation("io.cucumber:cucumber-java:5.6.0")
+	testImplementation("io.cucumber:cucumber-junit:5.4.0")
 }
 
 tasks.withType<Test> {
@@ -35,5 +37,21 @@ tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
+	}
+}
+
+val cucumberRuntime by configurations.creating {
+	extendsFrom(configurations["testImplementation"])
+}
+
+task("cucumber") {
+	dependsOn("assemble")
+	dependsOn("compileTestJava")
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
+			args = listOf("--plugin", "pretty", "--glue", "--strict" , "gradle.cucumber", "src/test/resources")
+		}
 	}
 }
