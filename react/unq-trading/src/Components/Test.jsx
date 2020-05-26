@@ -34,8 +34,17 @@ export default function Test() {
                         <Button 
                             variant="secondary" 
                             onClick={event => handleSecond("Valor hardcodeado, acá vemos que el handleSecond puede ser diferente en distintos lugares")} > 
-                            Cambiar valor second field
+                            Cambiar valor Second Field
                         </Button>
+                        {/*
+                          * Acá vemos que se le puede asignar al handleSecond una funcion cualquiera que tenga por ahí
+                          */}
+                        <Button 
+                            variant="secondary" 
+                            onClick={event => handleSecond(getRandom())}> 
+                            Asignar valor random a Second Field
+                        </Button>
+
                     </Form.Row>
                     <Form.Label> Valor del second field: {secondField}</Form.Label>
                 </Form>
@@ -54,4 +63,8 @@ function sent(testField) {
     }).catch((error) => {
         alert("fail")
     })
+}
+
+function getRandom() {
+    return Math.random()
 }
