@@ -11,7 +11,7 @@ class OrdenDeVenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
-
+    lateinit var nombreEmpresa: String
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
     var fechaDeCreacion: LocalDate = LocalDate.now()
