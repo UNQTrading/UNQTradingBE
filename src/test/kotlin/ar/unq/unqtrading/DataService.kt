@@ -25,4 +25,8 @@ class DataService {
             ordenDeVentaRepository.save(orden1)
             ordenDeVentaRepository.save(orden2)
     }
+
+    fun eliminarDatos() {
+        ordenDeVentaRepository.deleteAll()
+    }
 }
