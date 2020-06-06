@@ -11,21 +11,21 @@ class VisualizarOrdenesDeVentaSteps {
     lateinit var orden2: OrdenDeVenta
     lateinit var ordenes: List<OrdenDeVenta>
 
-    @Given("Given una empresa con nombre {nombre} y {cant} ordenes de venta")
-    fun setOrdenesDeVenta(nombre: String, cant: Int) {
+    @Given("una empresa con nombre {string} y {int} ordenes de venta")
+    fun una_empresa_con_nombre_y_ordenes_de_venta(nombre: String, cant: Int) {
         orden1 = OrdenDeVenta()
         orden2 = OrdenDeVenta()
         orden1.nombreEmpresa = nombre
         orden2.nombreEmpresa = nombre
     }
 
-    @When("When pregunto cuales son sus ordenes de venta")
-    fun setListadoDeOrdenes(day: String) {
+    @When("pregunto cuales son sus ordenes de venta")
+    fun pregunto_cuales_son_sus_ordenes_de_venta() {
         ordenes = listOf(orden1, orden2)
     }
 
-    @Then("Then debo visualizar {cantidad} ordenes de venta")
-    fun assertDay(cantidad: String?) {
+    @Then("debo visualizar {int} ordenes de venta")
+    fun debo_visualizar_ordenes_de_venta(cantidad: Int?) {
         Assert.assertEquals(cantidad, ordenes.size)
     }
 }
