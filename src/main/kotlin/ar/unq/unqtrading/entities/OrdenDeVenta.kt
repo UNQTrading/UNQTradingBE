@@ -1,5 +1,6 @@
 package ar.unq.unqtrading.entities
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -14,6 +15,8 @@ class OrdenDeVenta {
     lateinit var nombreEmpresa: String
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
+    @JsonFormat(pattern = "dd-MM-yyyy")
     var fechaDeCreacion: LocalDate = LocalDate.now()
+    @JsonFormat(pattern = "dd-MM-yyyy")
     var fechaDeVencimiento: LocalDate = LocalDate.now()
 }
