@@ -14,7 +14,7 @@ class OrdenDeVentaValidator {
         if (ordenDeVenta.precio < 1) {
             throw OrdenDeVentaIncorrectaException("El precio debe ser mayor a 0")
         }
-        if (!ordenDeVenta.fechaDeVencimiento.isAfter(LocalDate.now())) {
+        if (ordenDeVenta.fechaDeVencimiento.isBefore(LocalDate.now().plusDays(1))) {
             throw OrdenDeVentaIncorrectaException("La fecha debe ser posterior a ${LocalDate.now()}")
         }
     }

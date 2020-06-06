@@ -28,6 +28,7 @@ dependencies {
 	}
 	testImplementation("io.cucumber:cucumber-java:5.6.0")
 	testImplementation("io.cucumber:cucumber-junit:5.4.0")
+	testImplementation("io.cucumber:cucumber-spring:5.5.0")
 }
 
 tasks.withType<Test> {
