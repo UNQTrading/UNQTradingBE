@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service
 
 @Service
 interface IOrdenDeVentaService {
-    fun findAll() : List<OrdenDeVenta>
+    fun findAllByNombreEmpresa(nombreEmpresa: String) : List<OrdenDeVenta>
 }

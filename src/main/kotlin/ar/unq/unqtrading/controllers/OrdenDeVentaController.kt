@@ -16,5 +16,5 @@ class OrdenDeVentaController {
     @GetMapping(value = ["/all"], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    fun findAll() = ordenDeVentaService.findAll()
+    fun findAllByNombreEmpresa(@RequestParam nombreEmpresa: String) = ordenDeVentaService.findAllByNombreEmpresa(nombreEmpresa)
 }

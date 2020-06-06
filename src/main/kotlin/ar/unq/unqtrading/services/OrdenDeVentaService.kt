@@ -11,6 +11,6 @@ class OrdenDeVentaService : IOrdenDeVentaService {
     @Autowired
     lateinit var ordenDeVentaRepository: OrdenDeVentaRepository
 
-    override fun findAll(): List<OrdenDeVenta> = ordenDeVentaRepository.findAll()
+    override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByNombreEmpresa(nombreEmpresa)
 
 }

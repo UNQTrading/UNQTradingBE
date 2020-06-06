@@ -27,7 +27,7 @@ class OrdenDeVentaIntegrationTest {
     }
     @Test
     fun findAllTest() {
-        var ordenes = ordenDeVentaService.findAll()
+        var ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
         assertEquals(2, ordenes.size)
     }
 }
