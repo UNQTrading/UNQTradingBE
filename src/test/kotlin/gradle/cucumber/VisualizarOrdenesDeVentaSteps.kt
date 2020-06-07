@@ -21,6 +21,7 @@ class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
 
     @Given("una empresa con nombre {string} y {int} ordenes de venta")
     fun una_empresa_con_nombre_y_ordenes_de_venta(nombre: String, cant: Int) {
+        val url = "$DEFAULT_URL/save"
         orden1 = OrdenDeVenta()
         orden1.nombreEmpresa = nombre
         orden1.cantidadDeAcciones = 1000
@@ -33,15 +34,14 @@ class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
         orden2.precio = 500
         orden2.fechaDeCreacion = LocalDate.now()
         orden2.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
+        restTemplate.postForObject(url, orden1, OrdenDeVenta::class.java)!!
+        restTemplate.postForObject(url, orden2, OrdenDeVenta::class.java)!!
     }
 
     @When("pregunto cuales son sus ordenes de venta")
     fun pregunto_cuales_son_sus_ordenes_de_venta() {
-        val get = "$DEFAULT_URL/all?nombreEmpresa=UNQ"
-        val save = "$DEFAULT_URL/save"
-        restTemplate.postForObject(save, orden1, OrdenDeVenta::class.java)!!
-        restTemplate.postForObject(save, orden2, OrdenDeVenta::class.java)!!
-        listResponse = restTemplate.getForObject(get)!!
+        val url = "$DEFAULT_URL/all?nombreEmpresa=UNQ"
+        listResponse = restTemplate.getForObject(url)!!
     }
 
     @Then("debo visualizar {int} ordenes de venta")
