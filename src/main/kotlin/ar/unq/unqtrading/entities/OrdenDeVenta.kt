@@ -15,8 +15,8 @@ class OrdenDeVenta {
     lateinit var nombreEmpresa: String
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     var fechaDeCreacion: LocalDate = LocalDate.now()
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     lateinit var fechaDeVencimiento: LocalDate
 }
