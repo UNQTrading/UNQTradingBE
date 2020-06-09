@@ -1,11 +1,12 @@
 notifications:
-  email: true
+  email: flase
 
 language: java
 
 branches:
   only:
-  - master
+    - master
+    - sprint.*
 
 services:
   - mysql
