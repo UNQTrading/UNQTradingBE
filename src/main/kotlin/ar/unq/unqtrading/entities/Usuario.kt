@@ -1,5 +1,6 @@
 package ar.unq.unqtrading.entities
 
+import ar.unq.unqtrading.entities.exceptions.SaldoInsuficienteException
 import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
@@ -16,6 +17,8 @@ class Usuario() {
 
     fun comprar(orden: OrdenDeVenta) : Accion{
         var accion = Accion()
+        if (saldo < orden.precio)
+            throw SaldoInsuficienteException("No tienes el saldo suficientes para comprar estas acciones")
         accion.cantidad = orden.cantidadDeAcciones
         accion.nombreEmpresa = orden.nombreEmpresa
         accion.usuario = this
