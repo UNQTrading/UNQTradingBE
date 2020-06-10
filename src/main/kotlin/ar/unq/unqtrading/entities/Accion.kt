@@ -13,4 +13,9 @@ class Accion(){
     @ManyToOne(cascade = [CascadeType.ALL])
     lateinit var usuario: Usuario
 
+    constructor(cantidad: Int, nombreEmpresa: String, usuario: Usuario) : this() {
+        this.cantidad = cantidad
+        this.nombreEmpresa = nombreEmpresa
+        this.usuario = usuario
+    }
 }
