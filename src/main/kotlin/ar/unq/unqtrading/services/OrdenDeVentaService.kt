@@ -19,4 +19,8 @@ class OrdenDeVentaService : IOrdenDeVentaService {
         return ordenDeVentaRepository.save(ordenDeVenta)
     }
 
+    override fun findById(ordenId: Int): OrdenDeVenta {
+        return ordenDeVentaRepository.findById(ordenId).orElse(null)
+    }
+
 }
