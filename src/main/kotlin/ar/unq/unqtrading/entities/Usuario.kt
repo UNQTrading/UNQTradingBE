@@ -20,6 +20,7 @@ class Usuario() {
             throw SaldoInsuficienteException("No tienes el saldo suficiente para comprar estas acciones")
         var accion = Accion(orden.cantidadDeAcciones, orden.nombreEmpresa, this)
         acciones.add(accion)
+        saldo -= orden.precio
         return accion
     }
 
