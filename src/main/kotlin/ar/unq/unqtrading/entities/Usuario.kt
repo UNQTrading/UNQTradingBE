@@ -12,13 +12,20 @@ class Usuario() {
     lateinit var nombre: String
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
-    var acciones: MutableList<Accion> = mutableListOf()
+    var acciones: MutableSet<Accion> = mutableSetOf()
     var saldo: Int = 0
 
     fun buy(orden: OrdenDeVenta) : Accion{
+        var accion: Accion
         if (saldo < orden.precio)
             throw SaldoInsuficienteException("No tienes el saldo suficiente para comprar estas acciones")
-        var accion = Accion(orden.cantidadDeAcciones, orden.nombreEmpresa, this)
+        if (acciones.any { it.nombreEmpresa == orden.nombreEmpresa }) {
+            accion = acciones.single { it.nombreEmpresa == orden.nombreEmpresa }
+            acciones.remove(accion)
+            accion.cantidad+= orden.cantidadDeAcciones
+        } else {
+            accion = Accion(orden.cantidadDeAcciones, orden.nombreEmpresa, this)
+        }
         acciones.add(accion)
         saldo -= orden.precio
         return accion
