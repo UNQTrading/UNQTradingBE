@@ -24,4 +24,10 @@ class OrdenDeVentaController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.CREATED)
     fun saveOrdenDeVenta(@RequestBody ordenDeVenta: OrdenDeVenta) = ordenDeVentaService.saveOrdenDeVenta(ordenDeVenta)
+
+    @GetMapping(value = ["/find"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    fun findById(@RequestParam ordenId: Int) : OrdenDeVenta = ordenDeVentaService.findById(ordenId)
+
 }
