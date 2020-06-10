@@ -3,7 +3,7 @@ package ar.unq.unqtrading.entities
 import javax.persistence.*
 
 @Entity
-class Accion {
+class Accion(){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
