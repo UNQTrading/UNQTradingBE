@@ -22,4 +22,8 @@ class UsuarioService : IUsuarioService {
         return accion
     }
 
+    override fun findById(usuarioId: Int): Usuario {
+        return usuarioRepository.findById(usuarioId).orElse(null)
+    }
+
 }

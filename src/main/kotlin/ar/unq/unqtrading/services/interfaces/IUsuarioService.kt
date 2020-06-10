@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service
 interface IUsuarioService {
     fun save(usuario: Usuario): Usuario
     fun buy(ordenId: Int, usuarioId: Int): Accion
+    fun findById(usuarioId: Int): Usuario
 }

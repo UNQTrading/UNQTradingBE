@@ -30,4 +30,9 @@ class UsuarioController {
     fun comprarOrden(@RequestParam ordenId: Int, @RequestParam usuarioId: Int) : Accion{
         return usuarioService.buy(ordenId, usuarioId)
     }
+
+    @GetMapping(value = ["/find"])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    fun findUsuario(@RequestParam usuarioId: Int) : Usuario = usuarioService.findById(usuarioId)
 }

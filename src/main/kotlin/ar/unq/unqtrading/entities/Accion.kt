@@ -1,5 +1,6 @@
 package ar.unq.unqtrading.entities
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import javax.persistence.*
 
 @Entity
@@ -9,8 +10,7 @@ class Accion(){
     var id: Int = 0
     var cantidad: Int = 0
     lateinit var nombreEmpresa: String
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @ManyToOne(cascade = [CascadeType.ALL])
     lateinit var usuario: Usuario
 
 }
