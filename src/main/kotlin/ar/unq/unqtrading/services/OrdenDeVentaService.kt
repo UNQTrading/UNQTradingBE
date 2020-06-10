@@ -2,6 +2,7 @@ package ar.unq.unqtrading.services
 
 import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
+import ar.unq.unqtrading.services.exceptions.OrdenDeVentaNoEncontradaException
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
 import ar.unq.unqtrading.services.validator.OrdenDeVentaValidator
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,7 +21,7 @@ class OrdenDeVentaService : IOrdenDeVentaService {
     }
 
     override fun findById(ordenId: Int): OrdenDeVenta {
-        return ordenDeVentaRepository.findById(ordenId).orElse(null)
+        return ordenDeVentaRepository.findById(ordenId)
+                .orElseThrow { OrdenDeVentaNoEncontradaException("La orden de venta con Id $ordenId no existe") }
     }
-
 }

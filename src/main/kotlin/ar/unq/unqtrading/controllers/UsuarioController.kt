@@ -1,7 +1,6 @@
 package ar.unq.unqtrading.controllers
 
 import ar.unq.unqtrading.entities.Accion
-import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.entities.Usuario
 import ar.unq.unqtrading.services.UsuarioService
 import org.springframework.beans.factory.annotation.Autowired
