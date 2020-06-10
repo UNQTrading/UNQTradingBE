@@ -31,4 +31,3 @@ before_script:
 
 script:
   - ./gradlew check --debug --info
-  - ./gradlew cucumber
