@@ -2,7 +2,6 @@ package ar.unq.unqtrading.services
 
 import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Usuario
-import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
 import ar.unq.unqtrading.repositories.UsuarioRepository
 import ar.unq.unqtrading.services.exceptions.UsuarioNoEncontradoException
 import ar.unq.unqtrading.services.interfaces.IUsuarioService
@@ -18,7 +17,7 @@ class UsuarioService : IUsuarioService {
     override fun buy(ordenId: Int, usuarioId: Int): Accion {
         var usuario: Usuario = findById(usuarioId)
         var orden = ordenService.findById(ordenId)
-        var accion = usuario.comprar(orden)
+        var accion = usuario.buy(orden)
         usuarioRepository.save(usuario)
         return accion
     }

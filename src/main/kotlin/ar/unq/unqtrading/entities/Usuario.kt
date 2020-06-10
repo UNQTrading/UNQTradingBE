@@ -15,10 +15,10 @@ class Usuario() {
     var acciones: MutableList<Accion> = mutableListOf()
     var saldo: Int = 0
 
-    fun comprar(orden: OrdenDeVenta) : Accion{
+    fun buy(orden: OrdenDeVenta) : Accion{
         var accion = Accion()
         if (saldo < orden.precio)
-            throw SaldoInsuficienteException("No tienes el saldo suficientes para comprar estas acciones")
+            throw SaldoInsuficienteException("No tienes el saldo suficiente para comprar estas acciones")
         accion.cantidad = orden.cantidadDeAcciones
         accion.nombreEmpresa = orden.nombreEmpresa
         accion.usuario = this
