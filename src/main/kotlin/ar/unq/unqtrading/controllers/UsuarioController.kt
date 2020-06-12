@@ -34,4 +34,9 @@ class UsuarioController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     fun findUsuario(@RequestParam usuarioId: Int) : Usuario = usuarioService.findById(usuarioId)
+
+    @GetMapping(value = ["/acciones"])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    fun findAcciones(@RequestParam usuarioId: Int) : List<Accion> = usuarioService.findAcciones(usuarioId)
 }
