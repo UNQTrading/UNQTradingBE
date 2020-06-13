@@ -24,4 +24,7 @@ class OrdenDeVentaService : IOrdenDeVentaService {
         return ordenDeVentaRepository.findById(ordenId)
                 .orElseThrow { OrdenDeVentaNoEncontradaException("La orden de venta con Id $ordenId no existe") }
     }
+
+    override fun findAll(): List<OrdenDeVenta> = ordenDeVentaRepository.findAll()
+
 }

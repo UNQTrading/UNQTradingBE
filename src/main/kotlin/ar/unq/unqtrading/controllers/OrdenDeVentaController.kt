@@ -30,4 +30,8 @@ class OrdenDeVentaController {
     @ResponseStatus(value = HttpStatus.OK)
     fun findById(@RequestParam ordenId: Int) : OrdenDeVenta = ordenDeVentaService.findById(ordenId)
 
+    @GetMapping(value = ["/ordenes"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    fun findAllOrdenes() = ordenDeVentaService.findAll()
 }
