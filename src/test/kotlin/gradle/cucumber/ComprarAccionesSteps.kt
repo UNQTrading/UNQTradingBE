@@ -27,8 +27,8 @@ class ComprarAccionesSteps {
     @Given("una orden de venta con {int} acciones de la empresa {string}")
     fun una_orden_de_venta_con_acciones_de_la_empresa(cantidad: Int, nombre: String) {
         val url = "$DEFAULT_URL/save"
-        orden.nombreEmpresa = "UNQ"
-        orden.cantidadDeAcciones = 10
+        orden.nombreEmpresa = nombre
+        orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
         orden.precio = 10
         orden = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
@@ -37,7 +37,7 @@ class ComprarAccionesSteps {
     @When("un usuario con nombre {string} compra la orden")
     fun un_usuario_con_nombre_compra_la_orden(nombre: String) {
         val save = "$USUARIO_URL/save"
-        usuario.nombre = "user"
+        usuario.nombre = nombre
         usuario.saldo = 1000
         usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
         val comprar = "$USUARIO_URL/buy?ordenId=${orden.id}&usuarioId=${usuario.id}"
