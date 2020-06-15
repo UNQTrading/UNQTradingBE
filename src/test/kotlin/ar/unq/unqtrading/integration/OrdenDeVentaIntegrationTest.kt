@@ -38,7 +38,7 @@ class OrdenDeVentaIntegrationTest {
     }
 
     @Test
-    fun findAllTest() {
+    fun findAllByNombreEmpresaTest() {
         var ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
         assertEquals(2, ordenes.size)
     }
@@ -69,5 +69,11 @@ class OrdenDeVentaIntegrationTest {
         ordenCocaCola.fechaDeVencimiento = LocalDate.now().minusDays(1)
         val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
         assertEquals("La fecha debe ser posterior a ${LocalDate.now()}", exception.message)
+    }
+
+    @Test
+    fun findAllByTest() {
+        var ordenes = ordenDeVentaService.findAll()
+        assertEquals(2, ordenes.size)
     }
 }

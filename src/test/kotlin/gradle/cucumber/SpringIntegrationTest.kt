@@ -14,4 +14,5 @@ import org.springframework.web.client.RestTemplate
 class SpringIntegrationTest {
     protected var restTemplate = RestTemplate()
     protected val DEFAULT_URL = "http://localhost:8080/api/venta"
+    protected val USUARIO_URL = "http://localhost:8080/api/usuario"
 }
