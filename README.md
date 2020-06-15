@@ -14,7 +14,7 @@
 |Juan Cruz Vincenti|	jcvincenti|	juancruzvincenti@gmail.com|
 
 ## Backlog
-##### [Backlog Trello](https://trello.com/b/AvjqwmzW/unqtrading "Backlog Trello")
+##### [Backlog YouTrack](https://unqt.myjetbrains.com/youtrack/projects/3580f850-ba0b-4cdb-82a8-a9becc5dce43 "Backlog YouTrack")
 
 ## Documentación
 ##### [Drive](https://drive.google.com/drive/folders/19WxUJoQGb5_Kj3kcGTtnu9hRi1LpZjU8?usp=sharing "Drive")
