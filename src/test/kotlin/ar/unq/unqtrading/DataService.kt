@@ -2,7 +2,6 @@ package ar.unq.unqtrading
 
 import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Empresa
-import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.repositories.EmpresaRepository
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
 import ar.unq.unqtrading.services.interfaces.IEmpresaService
@@ -27,11 +26,11 @@ class DataService {
         var empresa = Empresa()
         var coca = Empresa()
         coca.nombreEmpresa = "Coca-Cola"
-        coca.contraseña = "12345"
+        coca.password = "12345"
         coca.email = "coca@coca.com"
         coca.cuil = 123456789
         empresa.nombreEmpresa = "UNQ"
-        empresa.contraseña = "1234578"
+        empresa.password = "1234578"
         empresa.email = "unq@unq.com"
         empresa.cuil = 98765541
         empresaService.save(empresa)

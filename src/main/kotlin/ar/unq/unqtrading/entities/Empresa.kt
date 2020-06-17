@@ -11,7 +11,7 @@ class Empresa() {
     lateinit var nombreEmpresa: String
     @Column(unique = true)
     lateinit var email: String
-    lateinit var contraseña: String
+    lateinit var password: String
     @Column(unique = true)
     var cuil: Int = 0
 
@@ -24,7 +24,7 @@ class Empresa() {
         if (id != other.id) return false
         if (nombreEmpresa != other.nombreEmpresa) return false
         if (email != other.email) return false
-        if (contraseña != other.contraseña) return false
+        if (password != other.password) return false
         if (cuil != other.cuil) return false
 
         return true
@@ -34,7 +34,7 @@ class Empresa() {
         var result = id
         result = 31 * result + nombreEmpresa.hashCode()
         result = 31 * result + email.hashCode()
-        result = 31 * result + contraseña.hashCode()
+        result = 31 * result + password.hashCode()
         result = 31 * result + cuil
         return result
     }

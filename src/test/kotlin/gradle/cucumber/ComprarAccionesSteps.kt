@@ -35,7 +35,7 @@ class ComprarAccionesSteps {
         empresa.nombreEmpresa = "UNQ"
         empresa.email = "test@test.com"
         empresa.cuil = 12345
-        empresa.contraseña = "123124"
+        empresa.password = "123124"
         orden.nombreEmpresa = nombre
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
