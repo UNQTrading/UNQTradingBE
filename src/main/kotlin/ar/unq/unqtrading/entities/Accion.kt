@@ -10,7 +10,7 @@ class Accion(){
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
     var cantidad: Int = 0
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne
     lateinit var empresa: Empresa
     @ManyToOne(cascade = [CascadeType.ALL])
     lateinit var usuario: Usuario
