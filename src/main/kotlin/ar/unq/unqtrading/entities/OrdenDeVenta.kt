@@ -9,7 +9,7 @@ class OrdenDeVenta() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne
     lateinit var empresa: Empresa
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0

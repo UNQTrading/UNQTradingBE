@@ -1,7 +1,7 @@
 package ar.unq.unqtrading.integration
 
 import ar.unq.unqtrading.DataService
-import ar.unq.unqtrading.entities.OrdenDeVenta
+import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
 import ar.unq.unqtrading.services.validator.OrdenDeVentaIncorrectaException
 import org.junit.Assert.assertEquals
@@ -17,7 +17,7 @@ import java.time.LocalDate
 class OrdenDeVentaIntegrationTest {
     @Autowired lateinit var ordenDeVentaService: IOrdenDeVentaService
     @Autowired lateinit var dataService: DataService
-    val ordenCocaCola = OrdenDeVenta()
+    val ordenCocaCola = OrdenDeVentaDTO()
 
     @BeforeEach
     fun init() {
