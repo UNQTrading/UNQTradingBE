@@ -2,6 +2,7 @@ package ar.unq.unqtrading.entities
 
 import ar.unq.unqtrading.entities.exceptions.SaldoInsuficienteException
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import java.time.LocalDate
 
@@ -21,6 +22,7 @@ class Usuario() {
     lateinit var username: String
 
     @Column (nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
 
     @Column (nullable = false)
