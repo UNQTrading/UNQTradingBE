@@ -1,6 +1,6 @@
 package ar.unq.unqtrading.entities
 
-import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
@@ -12,7 +12,7 @@ class Empresa() {
     lateinit var nombreEmpresa: String
     @Column(unique = true)
     lateinit var email: String
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
     @Column(unique = true)
     var cuil: Int = 0
