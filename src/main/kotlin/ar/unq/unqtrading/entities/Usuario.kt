@@ -10,7 +10,28 @@ class Usuario() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
+
+    @Column (nullable = false)
     lateinit var nombre: String
+
+    @Column (nullable = false)
+    lateinit var apellido: String
+
+    @Column (nullable = false)
+    lateinit var username: String
+
+    @Column (nullable = false)
+    lateinit var password: String
+
+    @Column (nullable = false)
+    lateinit var email: String
+
+    @Column (nullable = false)
+    var dni: Long = 0
+
+    @Column (nullable = false)
+    var cuit: Long = 0
+
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
     var acciones: MutableSet<Accion> = mutableSetOf()
