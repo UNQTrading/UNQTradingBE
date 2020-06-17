@@ -1,5 +1,6 @@
 package ar.unq.unqtrading.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -11,6 +12,7 @@ class Empresa() {
     lateinit var nombreEmpresa: String
     @Column(unique = true)
     lateinit var email: String
+    @JsonIgnore
     lateinit var password: String
     @Column(unique = true)
     var cuil: Int = 0
