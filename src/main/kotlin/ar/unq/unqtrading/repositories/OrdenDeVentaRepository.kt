@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface OrdenDeVentaRepository : JpaRepository<OrdenDeVenta, Int> {
-    fun findAllByNombreEmpresa(@Param("nombreEmpresa") nombreEmpresa: String): List<OrdenDeVenta>
+    fun findAllByEmpresaNombreEmpresa(@Param("nombreEmpresa") nombreEmpresa: String): List<OrdenDeVenta>
 }

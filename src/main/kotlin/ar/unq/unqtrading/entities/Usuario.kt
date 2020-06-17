@@ -38,11 +38,11 @@ class Usuario() {
     var saldo: Int = 0
 
     fun buy(orden: OrdenDeVenta) : Accion{
-        var accion = Accion(orden.cantidadDeAcciones, orden.nombreEmpresa, this, LocalDate.now())
+        var accion = Accion(orden.cantidadDeAcciones, orden.empresa, this, LocalDate.now())
         if (saldo < orden.precio)
             throw SaldoInsuficienteException("No tienes el saldo suficiente para comprar estas acciones")
-        if (acciones.any { it.nombreEmpresa == orden.nombreEmpresa }) {
-            accion = acciones.single { it.nombreEmpresa == orden.nombreEmpresa }
+        if (acciones.any { it.empresa == orden.empresa }) {
+            accion = acciones.single { it.empresa == orden.empresa }
             acciones.remove(accion)
             accion.cantidad+= orden.cantidadDeAcciones
         }

@@ -1,5 +1,7 @@
 package gradle.cucumber
 
+import ar.unq.unqtrading.dto.OrdenDeVentaDTO
+import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
@@ -14,21 +16,28 @@ import java.time.LocalDate
 @RunWith(Cucumber::class)
 @CucumberOptions(features = ["src/test/resources"])
 class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
-    lateinit var orden1: OrdenDeVenta
-    lateinit var orden2: OrdenDeVenta
     lateinit var response: OrdenDeVenta
     lateinit var listResponse: List<OrdenDeVenta>
+    var orden1 = OrdenDeVentaDTO()
+    var orden2 = OrdenDeVentaDTO()
 
     @Given("una empresa con nombre {string} y {int} ordenes de venta")
     fun una_empresa_con_nombre_y_ordenes_de_venta(nombre: String, cant: Int) {
         val url = "$DEFAULT_URL/save"
-        orden1 = OrdenDeVenta()
+        val saveEmpresa = "$EMPRESA_URL/register"
+
+        var empresaEntity = Empresa()
+        empresaEntity.nombreEmpresa = nombre
+        empresaEntity.email = "test@test.com"
+        empresaEntity.cuil = 12345
+        empresaEntity.password = "123124"
+        restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
+
         orden1.nombreEmpresa = nombre
         orden1.cantidadDeAcciones = 1000
         orden1.precio = 500
         orden1.fechaDeCreacion = LocalDate.now()
         orden1.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
-        orden2 = OrdenDeVenta()
         orden2.nombreEmpresa = nombre
         orden2.cantidadDeAcciones = 1000
         orden2.precio = 500
@@ -52,7 +61,7 @@ class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
 
     @Given("una empresa con nombre {string}")
     fun crearOrdenDeVenta(nombre: String) {
-        orden1 = OrdenDeVenta()
+        orden1 = OrdenDeVentaDTO()
         orden1.nombreEmpresa = nombre
         orden1.cantidadDeAcciones = 1000
         orden1.precio = 500
