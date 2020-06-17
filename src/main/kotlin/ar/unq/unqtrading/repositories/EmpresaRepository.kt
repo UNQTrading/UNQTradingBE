@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface EmpresaRepository : JpaRepository<Empresa, Int> {
-    fun findByNombreEmpresa(@Param ("nombreEmpresa") nombreEmpresa: String): Empresa
+    fun findByNombreEmpresa(@Param ("nombreEmpresa") nombreEmpresa: String): Empresa?
+    fun findByCuil(@Param ("cuil") cuil: Int): Empresa?
+    fun findByEmail(@Param ("email") email: String): Empresa?
 }

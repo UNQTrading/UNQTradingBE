@@ -23,7 +23,7 @@ class OrdenDeVentaService : IOrdenDeVentaService {
     override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByEmpresaNombreEmpresa(nombreEmpresa)
     override fun saveOrdenDeVenta(ordenDeVenta: OrdenDeVentaDTO): OrdenDeVenta {
         var orden = ordenDeVenta.toModel()
-        orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)
+        orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)!!
         ordenDeVentaValidator.validate(orden)
         return ordenDeVentaRepository.save(orden)
     }
