@@ -3,6 +3,7 @@ package ar.unq.unqtrading.services.validator
 import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.repositories.EmpresaRepository
 import ar.unq.unqtrading.services.exceptions.EmpresaYaExisteException
+import ar.unq.unqtrading.utils.ObjectStructureUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -12,6 +13,7 @@ class EmpresaValidator {
     lateinit var empresaRepository: EmpresaRepository
 
     fun validate(empresa: Empresa) {
+        ObjectStructureUtils.checkEmptyAttributes(empresa)
         if (empresaRepository.findByNombreEmpresa(empresa.nombreEmpresa) != null) {
             throw EmpresaYaExisteException("Ya hay una empresa registrada con el nombre ${empresa.nombreEmpresa}")
         }
