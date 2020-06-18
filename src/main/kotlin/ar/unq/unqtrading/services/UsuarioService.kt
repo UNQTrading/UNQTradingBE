@@ -6,7 +6,7 @@ import ar.unq.unqtrading.repositories.AccionRepository
 import ar.unq.unqtrading.repositories.UsuarioRepository
 import ar.unq.unqtrading.services.exceptions.UsuarioNoEncontradoException
 import ar.unq.unqtrading.services.interfaces.IUsuarioService
-import ar.unq.unqtrading.utils.PasswordEncoder
+import ar.unq.unqtrading.services.validator.UsuarioValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,11 +15,10 @@ class UsuarioService : IUsuarioService {
     @Autowired lateinit var usuarioRepository: UsuarioRepository
     @Autowired lateinit var ordenService: OrdenDeVentaService
     @Autowired lateinit var accionRepository: AccionRepository
-    @Autowired lateinit var encoder: PasswordEncoder
+    @Autowired lateinit var usuarioValidator: UsuarioValidator
 
     override fun save(usuario: Usuario) : Usuario {
-        val encodedPassword = encoder.encode(usuario.password)
-        usuario.password = encodedPassword
+        usuarioValidator.validate(usuario)
         return usuarioRepository.save(usuario)
     }
 

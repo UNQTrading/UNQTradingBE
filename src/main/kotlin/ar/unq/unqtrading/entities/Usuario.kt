@@ -32,7 +32,7 @@ class Usuario() {
     var dni: Long = 0
 
     @Column (nullable = false)
-    var cuit: Long = 0
+    var cuil: Long = 0
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
