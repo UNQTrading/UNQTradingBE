@@ -42,7 +42,7 @@ class VisualizarAccionesSteps {
         var empresaEntity = Empresa()
         empresaEntity.nombreEmpresa = empresa
         empresaEntity.email = "test@test.com"
-        empresaEntity.cuil = 12345
+        empresaEntity.cuit = 12345
         empresaEntity.password = "123124"
         restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
 

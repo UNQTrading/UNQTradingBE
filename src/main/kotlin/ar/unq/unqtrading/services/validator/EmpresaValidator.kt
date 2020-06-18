@@ -15,8 +15,8 @@ class EmpresaValidator {
         if (empresaRepository.findByNombreEmpresa(empresa.nombreEmpresa) != null) {
             throw EmpresaYaExisteException("Ya hay una empresa registrada con el nombre ${empresa.nombreEmpresa}")
         }
-        if (empresaRepository.findByCuil(empresa.cuil!!) != null) {
-            throw EmpresaYaExisteException("Ya hay una empresa registrada con el cuil ${empresa.cuil}")
+        if (empresaRepository.findByCuit(empresa.cuit) != null) {
+            throw EmpresaYaExisteException("Ya hay una empresa registrada con el cuil ${empresa.cuit}")
         }
         if(empresaRepository.findByEmail(empresa.email) != null ) {
             throw EmpresaYaExisteException("Ya hay una empresa registrada con el email ${empresa.email}")

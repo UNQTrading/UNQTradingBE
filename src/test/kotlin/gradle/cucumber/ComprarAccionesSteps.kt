@@ -34,7 +34,7 @@ class ComprarAccionesSteps {
         var empresa = Empresa()
         empresa.nombreEmpresa = "UNQ"
         empresa.email = "test@test.com"
-        empresa.cuil = 12345
+        empresa.cuit = 12345
         empresa.password = "123124"
         orden.nombreEmpresa = nombre
         orden.cantidadDeAcciones = cantidad
