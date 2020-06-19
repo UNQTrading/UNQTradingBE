@@ -37,7 +37,7 @@ class Empresa() {
         result = 31 * result + nombreEmpresa.hashCode()
         result = 31 * result + email.hashCode()
         result = 31 * result + password.hashCode()
-        result = (31 * result + cuit).toInt()
+        result = 31 * result + cuit.hashCode()
         return result
     }
 

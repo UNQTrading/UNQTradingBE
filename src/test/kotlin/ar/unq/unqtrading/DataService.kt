@@ -28,11 +28,11 @@ class DataService {
         coca.nombreEmpresa = "Coca-Cola"
         coca.password = "12345"
         coca.email = "coca@coca.com"
-        coca.cuil = 123456789
+        coca.cuit = 123456789
         empresa.nombreEmpresa = "UNQ"
         empresa.password = "1234578"
         empresa.email = "unq@unq.com"
-        empresa.cuil = 98765541
+        empresa.cuit = 98765541
         empresaService.save(empresa)
         empresaService.save(coca)
         orden1.nombreEmpresa = "UNQ"
