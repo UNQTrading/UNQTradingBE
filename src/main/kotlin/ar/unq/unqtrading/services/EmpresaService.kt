@@ -25,4 +25,10 @@ class EmpresaService : IEmpresaService {
         return empresaRepository.save(empresa)
     }
 
+    override fun login(cuit: Long, password: String): Empresa {
+        val empresa = empresaRepository.findByCuit(cuit)
+        empresaValidator.validateLogin(cuit, password, empresa)
+        return empresa!!
+    }
+
 }

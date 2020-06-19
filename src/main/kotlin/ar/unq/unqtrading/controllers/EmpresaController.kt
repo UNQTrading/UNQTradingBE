@@ -17,4 +17,9 @@ class EmpresaController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     fun register(@RequestBody empresa: Empresa) = empresaService.save(empresa)
+
+    @PostMapping(value = ["/login"])
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    fun login(@RequestParam cuit: Long, @RequestParam password: String) = empresaService.login(cuit, password)
 }

@@ -15,7 +15,7 @@ class Empresa() {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
     @Column(unique = true)
-    var cuil: Int = 0
+    var cuit: Long = 0
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -27,7 +27,7 @@ class Empresa() {
         if (nombreEmpresa != other.nombreEmpresa) return false
         if (email != other.email) return false
         if (password != other.password) return false
-        if (cuil != other.cuil) return false
+        if (cuit != other.cuit) return false
 
         return true
     }
@@ -37,7 +37,7 @@ class Empresa() {
         result = 31 * result + nombreEmpresa.hashCode()
         result = 31 * result + email.hashCode()
         result = 31 * result + password.hashCode()
-        result = 31 * result + cuil
+        result = (31 * result + cuit).toInt()
         return result
     }
 
