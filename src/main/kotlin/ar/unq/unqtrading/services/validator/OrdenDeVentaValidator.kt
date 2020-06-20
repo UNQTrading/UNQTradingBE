@@ -1,11 +1,11 @@
 package ar.unq.unqtrading.services.validator
 
 import ar.unq.unqtrading.entities.OrdenDeVenta
-import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.server.ResponseStatusException
+import ar.unq.unqtrading.services.exceptions.OrdenDeVentaIncorrectaException
+import org.springframework.stereotype.Component
 import java.time.LocalDate
 
+@Component
 class OrdenDeVentaValidator {
     fun validate(ordenDeVenta: OrdenDeVenta) {
         if (ordenDeVenta.cantidadDeAcciones < 1) {
@@ -19,6 +19,3 @@ class OrdenDeVentaValidator {
         }
     }
 }
-
-@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Orden de venta incorrecta")
-class OrdenDeVentaIncorrectaException(override val message: String): Exception()

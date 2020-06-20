@@ -18,7 +18,8 @@ class OrdenDeVentaService : IOrdenDeVentaService {
     @Autowired
     lateinit var empresaRepository: EmpresaRepository
 
-    val ordenDeVentaValidator = OrdenDeVentaValidator()
+    @Autowired
+    lateinit var ordenDeVentaValidator: OrdenDeVentaValidator
 
     override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByEmpresaNombreEmpresa(nombreEmpresa)
     override fun saveOrdenDeVenta(ordenDeVenta: OrdenDeVentaDTO): OrdenDeVenta {
