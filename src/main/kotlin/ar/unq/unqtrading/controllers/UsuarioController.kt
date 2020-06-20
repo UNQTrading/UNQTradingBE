@@ -39,4 +39,9 @@ class UsuarioController {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     fun findAcciones(@RequestParam usuarioId: Int) : List<Accion> = usuarioService.findAcciones(usuarioId)
+
+    @PostMapping(value = ["/login"])
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    fun login(@RequestParam dni: Long, @RequestParam username: String, @RequestParam password: String) = usuarioService.login(dni, username, password)
 }

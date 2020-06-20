@@ -39,4 +39,9 @@ class UsuarioService : IUsuarioService {
         return accionRepository.findByUsuarioId(usuarioId)
     }
 
+    override fun login(dni: Long, username: String, password: String): Usuario {
+        val usuario = usuarioRepository.findByDni(dni)
+        usuarioValidator.validateLogin(dni, username, password, usuario)
+        return usuario!!
+    }
 }
