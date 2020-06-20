@@ -3,11 +3,6 @@ notifications:
 
 language: java
 
-branches:
-  only:
-    - master
-    - sprint.*
-
 services:
   - mysql
 
