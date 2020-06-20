@@ -2,8 +2,8 @@ package ar.unq.unqtrading.integration
 
 import ar.unq.unqtrading.DataService
 import ar.unq.unqtrading.dto.OrdenDeVentaDTO
+import ar.unq.unqtrading.services.exceptions.OrdenDeVentaIncorrectaException
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
-import ar.unq.unqtrading.services.validator.OrdenDeVentaIncorrectaException
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -36,7 +36,7 @@ class OrdenDeVentaIntegrationTest {
 
     @Test
     fun findAllByNombreEmpresaTest() {
-        var ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
+        val ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
         assertEquals(2, ordenes.size)
     }
 
@@ -70,7 +70,7 @@ class OrdenDeVentaIntegrationTest {
 
     @Test
     fun findAllByTest() {
-        var ordenes = ordenDeVentaService.findAll()
+        val ordenes = ordenDeVentaService.findAll()
         assertEquals(2, ordenes.size)
     }
 }
