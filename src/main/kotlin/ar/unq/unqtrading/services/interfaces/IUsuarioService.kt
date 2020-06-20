@@ -10,4 +10,5 @@ interface IUsuarioService {
     fun buy(ordenId: Int, usuarioId: Int): Accion
     fun findById(usuarioId: Int): Usuario
     fun findAcciones(usuarioId: Int): List<Accion>
+    fun login(dni: Long, username: String, password: String): Usuario
 }
