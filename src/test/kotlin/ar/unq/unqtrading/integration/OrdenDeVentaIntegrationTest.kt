@@ -69,7 +69,7 @@ class OrdenDeVentaIntegrationTest {
     }
 
     @Test
-    fun findAllByTest() {
+    fun findAllOrdenesTest() {
         val ordenes = ordenDeVentaService.findAll()
         assertEquals(2, ordenes.size)
     }
