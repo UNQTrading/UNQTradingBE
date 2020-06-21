@@ -34,6 +34,12 @@ class VisualizarAccionesSteps {
         val save = "$USUARIO_URL/save"
         usuario.nombre = "Pepe"
         usuario.saldo = 50000
+        usuario.apellido = "apellido"
+        usuario.cuil = 11111111111
+        usuario.dni = 38533749
+        usuario.email = "email@email.com"
+        usuario.username = "username"
+        usuario.password = "password"
         usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
 
         val url = "$DEFAULT_URL/save"

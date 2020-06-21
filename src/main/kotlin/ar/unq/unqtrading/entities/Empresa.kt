@@ -12,7 +12,6 @@ class Empresa() {
     lateinit var nombreEmpresa: String
     @Column(unique = true)
     lateinit var email: String
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
     @Column(unique = true)
     var cuit: Long = 0

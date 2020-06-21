@@ -22,7 +22,6 @@ class Usuario() {
     lateinit var username: String
 
     @Column (nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
 
     @Column (nullable = false)
