@@ -32,15 +32,16 @@ class UsuarioValidator {
         validateDni(dni)
         validateUsername(username)
         validatePassword(password)
-        if (usuario === null || !usuario.password.contentEquals(password)) {
+        if (usuario === null || !usuario.password.contentEquals(password) ||
+                        !usuario.username.contentEquals(username)) {
             throw LoginFallidoException("Datos ingresados incorrectos")
         }
     }
 
 
     private fun validateDni(dni: Long) {
-        if ("$dni".length !== 8) {
-            throw DniInvalidoException("El dni debe tener 8 dígitos")
+        if ("$dni".length == 0 ) {
+            throw DniInvalidoException("El DNI no puede estar vacío")
         }
     }
 
