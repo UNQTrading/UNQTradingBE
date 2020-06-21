@@ -37,7 +37,7 @@ class LoginUsuarioSteps {
         response = restTemplate.postForEntity(builder.toUriString(), null, Void::class.java)
     }
 
-    @Then("el status code de la respuesta es {int}")
+    @Then("el codigo de la respuesta es {int}")
     fun assertStatusCode(status: Int){
         Assert.assertEquals(status, response.statusCodeValue)
     }
