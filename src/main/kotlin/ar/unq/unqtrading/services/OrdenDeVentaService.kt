@@ -1,6 +1,8 @@
 package ar.unq.unqtrading.services
 
+import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.OrdenDeVenta
+import ar.unq.unqtrading.repositories.EmpresaRepository
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
 import ar.unq.unqtrading.services.exceptions.OrdenDeVentaNoEncontradaException
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
@@ -12,12 +14,19 @@ import org.springframework.stereotype.Service
 class OrdenDeVentaService : IOrdenDeVentaService {
     @Autowired
     lateinit var ordenDeVentaRepository: OrdenDeVentaRepository
-    val ordenDeVentaValidator = OrdenDeVentaValidator()
 
-    override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByNombreEmpresa(nombreEmpresa)
-    override fun saveOrdenDeVenta(ordenDeVenta: OrdenDeVenta): OrdenDeVenta {
-        ordenDeVentaValidator.validate(ordenDeVenta)
-        return ordenDeVentaRepository.save(ordenDeVenta)
+    @Autowired
+    lateinit var empresaRepository: EmpresaRepository
+
+    @Autowired
+    lateinit var ordenDeVentaValidator: OrdenDeVentaValidator
+
+    override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByEmpresaNombreEmpresa(nombreEmpresa)
+    override fun saveOrdenDeVenta(ordenDeVenta: OrdenDeVentaDTO): OrdenDeVenta {
+        var orden = ordenDeVenta.toModel()
+        orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)!!
+        ordenDeVentaValidator.validate(orden)
+        return ordenDeVentaRepository.save(orden)
     }
 
     override fun findById(ordenId: Int): OrdenDeVenta {

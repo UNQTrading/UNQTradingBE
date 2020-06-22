@@ -1,26 +1,23 @@
 package ar.unq.unqtrading.integration
 
 import ar.unq.unqtrading.DataService
-import ar.unq.unqtrading.entities.OrdenDeVenta
-import ar.unq.unqtrading.services.OrdenDeVentaService
+import ar.unq.unqtrading.dto.OrdenDeVentaDTO
+import ar.unq.unqtrading.services.exceptions.OrdenDeVentaIncorrectaException
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
-import ar.unq.unqtrading.services.validator.OrdenDeVentaIncorrectaException
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDate
 
 @SpringBootTest
 class OrdenDeVentaIntegrationTest {
     @Autowired lateinit var ordenDeVentaService: IOrdenDeVentaService
     @Autowired lateinit var dataService: DataService
-    val ordenCocaCola = OrdenDeVenta()
+    val ordenCocaCola = OrdenDeVentaDTO()
 
     @BeforeEach
     fun init() {
@@ -39,7 +36,7 @@ class OrdenDeVentaIntegrationTest {
 
     @Test
     fun findAllByNombreEmpresaTest() {
-        var ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
+        val ordenes = ordenDeVentaService.findAllByNombreEmpresa("UNQ")
         assertEquals(2, ordenes.size)
     }
 
@@ -72,8 +69,8 @@ class OrdenDeVentaIntegrationTest {
     }
 
     @Test
-    fun findAllByTest() {
-        var ordenes = ordenDeVentaService.findAll()
+    fun findAllOrdenesTest() {
+        val ordenes = ordenDeVentaService.findAll()
         assertEquals(2, ordenes.size)
     }
 }

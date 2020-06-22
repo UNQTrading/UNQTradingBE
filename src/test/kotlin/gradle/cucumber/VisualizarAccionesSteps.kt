@@ -1,6 +1,8 @@
 package gradle.cucumber
 
+import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Accion
+import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.entities.Usuario
 import io.cucumber.java.en.Given
@@ -18,29 +20,45 @@ import java.time.LocalDate
 @RunWith(Cucumber::class)
 @CucumberOptions(features = ["src/test/resources"])
 class VisualizarAccionesSteps {
-    protected var restTemplate = RestTemplate()
-    protected val USUARIO_URL = "http://localhost:8080/api/usuario"
-    protected val DEFAULT_URL = "http://localhost:8080/api/venta"
+    var restTemplate = RestTemplate()
+    val USUARIO_URL = "http://localhost:8080/api/usuario"
+    val DEFAULT_URL = "http://localhost:8080/api/venta"
+    val EMPRESA_URL = "http://localhost:8080/api/empresa"
     var usuario = Usuario()
-    var orden = OrdenDeVenta()
+    var ordenResult = OrdenDeVenta()
     lateinit var listResponse: List<Accion>
 
     @Given("un usuario con una accion con cantidad {int} de la empresa {string}")
     fun un_usuario_con_accion_con_cantidad_de_la_empresa(cantidad: Int, empresa: String) {
-
+        var orden = OrdenDeVentaDTO()
         val save = "$USUARIO_URL/save"
         usuario.nombre = "Pepe"
         usuario.saldo = 50000
+        usuario.apellido = "apellido"
+        usuario.cuil = 11111111111
+        usuario.dni = 38533749
+        usuario.email = "email@email.com"
+        usuario.username = "username"
+        usuario.password = "password"
         usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
 
         val url = "$DEFAULT_URL/save"
+
+        val saveEmpresa = "$EMPRESA_URL/register"
+        var empresaEntity = Empresa()
+        empresaEntity.nombreEmpresa = empresa
+        empresaEntity.email = "test@test.com"
+        empresaEntity.cuit = 12345
+        empresaEntity.password = "123124"
+        restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
+
         orden.nombreEmpresa = empresa
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
         orden.precio = 10
-        orden = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
+        ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
 
-        val comprar = "$USUARIO_URL/buy?ordenId=${orden.id}&usuarioId=${usuario.id}"
+        val comprar = "$USUARIO_URL/buy?ordenId=${ordenResult.id}&usuarioId=${usuario.id}"
         restTemplate.postForObject(comprar,usuario, Accion::class.java) as Accion
 
     }
