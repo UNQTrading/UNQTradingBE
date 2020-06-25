@@ -44,4 +44,8 @@ class UsuarioService : IUsuarioService {
         usuarioValidator.validateLogin(dni, username, password, usuario)
         return usuario!!
     }
+
+    override fun cargarSaldo(dni: Long, saldo: Int) {
+        usuarioRepository.updateSaldo(dni, saldo)
+    }
 }

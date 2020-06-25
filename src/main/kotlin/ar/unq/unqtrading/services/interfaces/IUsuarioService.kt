@@ -11,4 +11,5 @@ interface IUsuarioService {
     fun findById(usuarioId: Int): Usuario
     fun findAcciones(usuarioId: Int): List<Accion>
     fun login(dni: Long, username: String, password: String): Usuario
+    fun cargarSaldo(dni: Long, saldo: Int)
 }
