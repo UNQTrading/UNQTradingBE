@@ -46,6 +46,7 @@ class UsuarioService : IUsuarioService {
     }
 
     override fun cargarSaldo(dni: Long, saldo: Int) {
+        usuarioValidator.validateSaldo(saldo)
         usuarioRepository.updateSaldo(dni, saldo)
     }
 }

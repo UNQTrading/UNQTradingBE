@@ -36,7 +36,6 @@ class Usuario() {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
     var acciones: MutableSet<Accion> = mutableSetOf()
-    @JsonIgnore
     var saldo: Int = 0
 
     fun buy(orden: OrdenDeVenta) : Accion{
