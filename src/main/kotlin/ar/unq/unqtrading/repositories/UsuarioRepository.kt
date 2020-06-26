@@ -16,6 +16,6 @@ interface UsuarioRepository: JpaRepository<Usuario, Int> {
     fun findByUsername(@Param("username") username: String): Usuario?
     @Transactional
     @Modifying
-    @Query("update Usuario u set u.saldo = ?2 where u.dni = ?1")
+    @Query("update Usuario u set u.saldo = u.saldo + ?2 where u.dni = ?1")
     fun updateSaldo(dni: Long, saldo: Int)
 }
