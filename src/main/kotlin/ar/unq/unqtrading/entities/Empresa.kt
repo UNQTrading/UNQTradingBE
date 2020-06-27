@@ -7,7 +7,7 @@ import javax.persistence.*
 class Empresa() : Usuario()  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0
+    override var id: Int = 0
     @Column(name = "nombre_empresa", unique = true)
     lateinit var nombreEmpresa: String
     @Column(unique = true)

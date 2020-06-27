@@ -9,7 +9,7 @@ import java.time.LocalDate
 class Persona() : Usuario() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0
+    override var id: Int = 0
 
     @Column (nullable = false)
     lateinit var nombre: String
