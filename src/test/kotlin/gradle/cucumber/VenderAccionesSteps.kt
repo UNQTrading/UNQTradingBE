@@ -65,7 +65,8 @@ class VenderAccionesSteps {
 
     @Then("el monto se ve reflejado en saldo del vendedor")
     fun el_monto_se_ve_reflejado_en_saldo_de_la_empresa() {
+        var orden = restTemplate.getForObject("$DEFAULT_URL/find?ordenId=${ordenResult.id}", OrdenDeVenta::class.java)
 
-        Assert.assertEquals(ordenResult.precio, ordenResult.creador.saldo)
+        Assert.assertEquals(ordenResult.precio, orden?.creador?.saldo)
     }
 }

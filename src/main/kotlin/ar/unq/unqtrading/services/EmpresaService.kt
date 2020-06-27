@@ -25,12 +25,4 @@ class EmpresaService : IEmpresaService {
         empresaValidator.validateLogin(cuit, password, empresa)
         return empresa!!
     }
-
-    override fun sell(ordenDeVenta: OrdenDeVenta) : Empresa {
-        val empresa = ordenDeVenta.empresa
-        empresa.saldo += ordenDeVenta.precio
-        empresaRepository.save(empresa)
-        return empresa
-    }
-
 }

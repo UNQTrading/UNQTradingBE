@@ -59,8 +59,14 @@ class DataService {
         orden2.precio = 2000
         orden1.fechaDeVencimiento = LocalDate.of(2020,10,20)
         orden2.fechaDeVencimiento = LocalDate.of(2020,10,20)
+        orden1.creadorId = coca.id
+        orden2.creadorId = empresa.id
         ordenDeVentaService.saveOrdenDeVenta(orden1)
         ordenDeVentaService.saveOrdenDeVenta(orden2)
+    }
+
+    fun getIdEmpresaByNombre(nombre : String): Int? {
+        return empresaRepository.findByNombreEmpresa(nombre)?.id
     }
 
     fun eliminarDatos() {

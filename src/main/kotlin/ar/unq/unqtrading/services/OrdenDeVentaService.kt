@@ -35,10 +35,11 @@ class OrdenDeVentaService : IOrdenDeVentaService {
         orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)!!
 
         //TODO: acomodar esto
-        var creador = personaRepository.findById(ordenDeVenta.creadorId!!)
+        var creador: Optional<*> = personaRepository.findById(ordenDeVenta.creadorId!!)
         if (!creador.isPresent){
-            orden.creador = empresaRepository.findById(ordenDeVenta.creadorId!!).get()
+            creador = empresaRepository.findById(ordenDeVenta.creadorId!!)
         }
+        orden.creador = creador.get() as Usuario
 
         ordenDeVentaValidator.validate(orden)
         return ordenDeVentaRepository.save(orden)

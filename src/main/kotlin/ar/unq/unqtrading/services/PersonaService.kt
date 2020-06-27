@@ -3,6 +3,7 @@ package ar.unq.unqtrading.services
 import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Persona
 import ar.unq.unqtrading.repositories.AccionRepository
+import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
 import ar.unq.unqtrading.repositories.PersonaRepository
 import ar.unq.unqtrading.services.exceptions.UsuarioNoEncontradoException
 import ar.unq.unqtrading.services.interfaces.IPersonaService
@@ -16,7 +17,7 @@ class PersonaService : IPersonaService {
     @Autowired lateinit var ordenService: OrdenDeVentaService
     @Autowired lateinit var accionRepository: AccionRepository
     @Autowired lateinit var usuarioValidator: UsuarioValidator
-    @Autowired lateinit var empresaService: EmpresaService
+    @Autowired lateinit var ordenDeVentaRepository: OrdenDeVentaRepository
 
     override fun save(persona: Persona) : Persona {
         usuarioValidator.validate(persona)
@@ -27,7 +28,8 @@ class PersonaService : IPersonaService {
         var persona: Persona = findById(usuarioId)
         var orden = ordenService.findById(ordenId)
         var accion = persona.buy(orden)
-        accion.empresa = empresaService.sell(orden)
+        orden.creador.saldo += orden.precio
+        ordenDeVentaRepository.save(orden)
         personaRepository.save(persona)
         return accion
     }

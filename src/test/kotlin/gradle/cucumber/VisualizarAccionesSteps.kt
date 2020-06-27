@@ -50,12 +50,13 @@ class VisualizarAccionesSteps {
         empresaEntity.email = "test@test.com"
         empresaEntity.cuit = 12345
         empresaEntity.password = "123124"
-        restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
+        empresaEntity = restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
 
         orden.nombreEmpresa = empresa
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
         orden.precio = 10
+        orden.creadorId = empresaEntity.id
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
 
         val comprar = "$USUARIO_URL/buy?ordenId=${ordenResult.id}&usuarioId=${usuario.id}"

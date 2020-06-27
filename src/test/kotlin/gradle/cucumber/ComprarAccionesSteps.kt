@@ -40,7 +40,8 @@ class ComprarAccionesSteps {
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
         orden.precio = 10
-        restTemplate.postForObject(saveEmpresa, empresa, Empresa::class.java) as Empresa
+        empresa = restTemplate.postForObject(saveEmpresa, empresa, Empresa::class.java) as Empresa
+        orden.creadorId = empresa.id
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
     }
 
