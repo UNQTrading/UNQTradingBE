@@ -15,6 +15,7 @@ class Empresa() {
     lateinit var password: String
     @Column(unique = true)
     var cuit: Long = 0
+    var saldo: Int = 0
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
