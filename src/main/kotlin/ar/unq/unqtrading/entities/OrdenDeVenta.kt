@@ -6,6 +6,7 @@ import javax.persistence.*
 
 @Entity
 class OrdenDeVenta() {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
@@ -13,6 +14,9 @@ class OrdenDeVenta() {
     lateinit var empresa: Empresa
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
+
+    @ManyToOne
+    lateinit var creador : Usuario
     @JsonFormat(pattern = "yyyy-MM-dd")
     var fechaDeCreacion: LocalDate = LocalDate.now()
     @JsonFormat(pattern = "yyyy-MM-dd")

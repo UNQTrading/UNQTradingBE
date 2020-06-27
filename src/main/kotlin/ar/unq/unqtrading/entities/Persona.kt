@@ -6,10 +6,8 @@ import javax.persistence.*
 import java.time.LocalDate
 
 @Entity
+@DiscriminatorValue("Persona")
 class Persona() : Usuario() {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Int = 0
 
     @Column (nullable = false)
     lateinit var nombre: String

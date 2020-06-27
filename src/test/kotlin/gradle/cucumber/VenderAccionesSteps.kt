@@ -42,7 +42,8 @@ class VenderAccionesSteps {
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
         orden.precio = precio
-        restTemplate.postForObject(saveEmpresa, empresa, Empresa::class.java) as Empresa
+        empresa = restTemplate.postForObject(saveEmpresa, empresa, Empresa::class.java) as Empresa
+        orden.creadorId = empresa.id
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
     }
 
@@ -65,6 +66,6 @@ class VenderAccionesSteps {
     @Then("el monto se ve reflejado en saldo de la empresa")
     fun el_monto_se_ve_reflejado_en_saldo_de_la_empresa() {
 
-        Assert.assertEquals(ordenResult.precio, accion!!.empresa.saldo)
+        Assert.assertEquals(ordenResult.precio, ordenResult.creador.saldo)
     }
 }

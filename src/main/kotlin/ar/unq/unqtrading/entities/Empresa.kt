@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
+@DiscriminatorValue("Empresa")
 class Empresa() : Usuario()  {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    override var id: Int = 0
+
     @Column(name = "nombre_empresa", unique = true)
     lateinit var nombreEmpresa: String
     @Column(unique = true)
