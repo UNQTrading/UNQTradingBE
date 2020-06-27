@@ -4,7 +4,7 @@ import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
-import ar.unq.unqtrading.entities.Usuario
+import ar.unq.unqtrading.entities.Persona
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -24,12 +24,12 @@ class VisualizarAccionesSteps {
     val USUARIO_URL = "http://localhost:8080/api/usuario"
     val DEFAULT_URL = "http://localhost:8080/api/venta"
     val EMPRESA_URL = "http://localhost:8080/api/empresa"
-    var usuario = Usuario()
+    var usuario = Persona()
     var ordenResult = OrdenDeVenta()
     lateinit var listResponse: List<Accion>
 
-    @Given("un usuario con una accion con cantidad {int} de la empresa {string}")
-    fun un_usuario_con_accion_con_cantidad_de_la_empresa(cantidad: Int, empresa: String) {
+    @Given("una persona con una accion con cantidad {int} de la empresa {string}")
+    fun una_persona_con_accion_con_cantidad_de_la_empresa(cantidad: Int, empresa: String) {
         var orden = OrdenDeVentaDTO()
         val save = "$USUARIO_URL/save"
         usuario.nombre = "Pepe"
@@ -40,7 +40,7 @@ class VisualizarAccionesSteps {
         usuario.email = "email@email.com"
         usuario.username = "username"
         usuario.password = "password"
-        usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
+        usuario = restTemplate.postForObject(save, usuario, Persona::class.java) as Persona
 
         val url = "$DEFAULT_URL/save"
 

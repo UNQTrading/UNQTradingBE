@@ -1,14 +1,14 @@
 package ar.unq.unqtrading.services.interfaces
 
 import ar.unq.unqtrading.entities.Accion
-import ar.unq.unqtrading.entities.Usuario
+import ar.unq.unqtrading.entities.Persona
 import org.springframework.stereotype.Service
 
 @Service
-interface IUsuarioService {
-    fun save(usuario: Usuario): Usuario
+interface IPersonaService {
+    fun save(persona: Persona): Persona
     fun buy(ordenId: Int, usuarioId: Int): Accion
-    fun findById(usuarioId: Int): Usuario
+    fun findById(personaId: Int): Persona
     fun findAcciones(usuarioId: Int): List<Accion>
-    fun login(dni: Long, username: String, password: String): Usuario
+    fun login(dni: Long, username: String, password: String): Persona
 }

@@ -2,12 +2,11 @@ package ar.unq.unqtrading.entities
 
 import ar.unq.unqtrading.entities.exceptions.SaldoInsuficienteException
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import java.time.LocalDate
 
 @Entity
-class Usuario() {
+class Persona() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
@@ -34,7 +33,7 @@ class Usuario() {
     var cuil: Long = 0
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "persona", cascade = [CascadeType.ALL])
     var acciones: MutableSet<Accion> = mutableSetOf()
     var saldo: Int = 0
 

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface AccionRepository : JpaRepository<Accion, Int> {
-    fun findByUsuarioId(@Param("usuario") usuario: Int): List<Accion>
+    fun findByPersonaId(@Param("persona") persona: Int): List<Accion>
 }

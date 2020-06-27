@@ -2,11 +2,11 @@ package ar.unq.unqtrading
 
 import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Empresa
-import ar.unq.unqtrading.entities.Usuario
+import ar.unq.unqtrading.entities.Persona
 import ar.unq.unqtrading.repositories.EmpresaRepository
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
-import ar.unq.unqtrading.repositories.UsuarioRepository
-import ar.unq.unqtrading.services.UsuarioService
+import ar.unq.unqtrading.repositories.PersonaRepository
+import ar.unq.unqtrading.services.PersonaService
 import ar.unq.unqtrading.services.interfaces.IEmpresaService
 import ar.unq.unqtrading.services.interfaces.IOrdenDeVentaService
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,15 +24,15 @@ class DataService {
     @Autowired
     lateinit var empresaRepository: EmpresaRepository
     @Autowired
-    lateinit var usuarioService: UsuarioService
+    lateinit var personaService: PersonaService
     @Autowired
-    lateinit var usuarioRepository: UsuarioRepository
+    lateinit var personaRepository: PersonaRepository
     fun crearDatos() {
         var orden1 = OrdenDeVentaDTO()
         var orden2 = OrdenDeVentaDTO()
         var empresa = Empresa()
         var coca = Empresa()
-        var persona = Usuario()
+        var persona = Persona()
         coca.nombreEmpresa = "Coca-Cola"
         coca.password = "12345"
         coca.email = "coca@coca.com"
@@ -48,7 +48,7 @@ class DataService {
         persona.email = "fede@fede.com"
         persona.dni = 12345678
         persona.cuil = 20123456787
-        usuarioService.save(persona)
+        personaService.save(persona)
         empresaService.save(empresa)
         empresaService.save(coca)
         orden1.nombreEmpresa = "UNQ"
@@ -66,6 +66,6 @@ class DataService {
     fun eliminarDatos() {
         ordenDeVentaRepository.deleteAll()
         empresaRepository.deleteAll()
-        usuarioRepository.deleteAll()
+        personaRepository.deleteAll()
     }
 }

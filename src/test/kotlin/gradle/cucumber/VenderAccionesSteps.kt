@@ -4,8 +4,7 @@ import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
-import ar.unq.unqtrading.entities.Usuario
-import io.cucumber.java.PendingException
+import ar.unq.unqtrading.entities.Persona
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -14,7 +13,6 @@ import io.cucumber.junit.CucumberOptions
 import org.junit.Assert
 import org.junit.runner.RunWith
 import org.springframework.web.client.RestTemplate
-import org.springframework.web.util.UriComponentsBuilder
 import java.time.LocalDate
 
 
@@ -25,7 +23,7 @@ class VenderAccionesSteps {
     val DEFAULT_URL = "http://localhost:8080/api/venta"
     val USUARIO_URL = "http://localhost:8080/api/usuario"
     val EMPRESA_URL = "http://localhost:8080/api/empresa"
-    var usuario = Usuario()
+    var usuario = Persona()
     var accion: Accion? = null
     var ordenResult = OrdenDeVenta()
     var empresa = Empresa()
@@ -48,10 +46,10 @@ class VenderAccionesSteps {
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
     }
 
-    @When("un usuario con saldo suficiente compra la orden")
-    fun un_usuario_con_nombre_compra_la_orden() {
+    @When("una persona con saldo suficiente compra la orden")
+    fun una_persona_con_nombre_compra_la_orden() {
         val save = "$USUARIO_URL/save"
-        usuario.nombre = "usuario"
+        usuario.nombre = "persona"
         usuario.saldo = ordenResult.precio
         usuario.apellido = "apellido"
         usuario.cuil = 11111111111
@@ -59,7 +57,7 @@ class VenderAccionesSteps {
         usuario.email = "email@email.com"
         usuario.username = "username"
         usuario.password = "password"
-        usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
+        usuario = restTemplate.postForObject(save, usuario, Persona::class.java) as Persona
         val comprar = "$USUARIO_URL/buy?ordenId=${ordenResult.id}&usuarioId=${usuario.id}"
         accion = restTemplate.postForObject(comprar,usuario, Accion::class.java) as Accion
     }

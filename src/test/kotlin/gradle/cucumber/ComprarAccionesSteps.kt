@@ -4,7 +4,7 @@ import ar.unq.unqtrading.dto.OrdenDeVentaDTO
 import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
-import ar.unq.unqtrading.entities.Usuario
+import ar.unq.unqtrading.entities.Persona
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -23,7 +23,7 @@ class ComprarAccionesSteps {
     val DEFAULT_URL = "http://localhost:8080/api/venta"
     val USUARIO_URL = "http://localhost:8080/api/usuario"
     val EMPRESA_URL = "http://localhost:8080/api/empresa"
-    var usuario = Usuario()
+    var usuario = Persona()
     var accion: Accion? = null
     var ordenResult = OrdenDeVenta()
     @Given("una orden de venta con {int} acciones de la empresa {string}")
@@ -44,8 +44,8 @@ class ComprarAccionesSteps {
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
     }
 
-    @When("un usuario con nombre {string} compra la orden")
-    fun un_usuario_con_nombre_compra_la_orden(nombre: String) {
+    @When("una persona con nombre {string} compra la orden")
+    fun una_persona_con_nombre_compra_la_orden(nombre: String) {
         val save = "$USUARIO_URL/save"
         usuario.nombre = nombre
         usuario.saldo = 1000
@@ -55,13 +55,13 @@ class ComprarAccionesSteps {
         usuario.email = "email@email.com"
         usuario.username = "username"
         usuario.password = "password"
-        usuario = restTemplate.postForObject(save, usuario, Usuario::class.java) as Usuario
+        usuario = restTemplate.postForObject(save, usuario, Persona::class.java) as Persona
         val comprar = "$USUARIO_URL/buy?ordenId=${ordenResult.id}&usuarioId=${usuario.id}"
         accion = restTemplate.postForObject(comprar,usuario, Accion::class.java) as Accion
     }
 
-    @Then("el usuario debe tener esa orden en su cuenta")
+    @Then("la persona debe tener esa orden en su cuenta")
     fun el_usuario_debe_tener_esa_orden_en_su_cuenta() {
-        Assert.assertEquals(usuario.id, accion!!.usuario.id)
+        Assert.assertEquals(usuario.id, accion!!.persona.id)
     }
 }

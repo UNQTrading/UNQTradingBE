@@ -29,8 +29,8 @@ class RegistrarEmpresaSteps {
         empresa.password = password
     }
 
-    @When("el usuario se registra")
-    fun el_usuario_se_registra() {
+    @When("la empresa se registra")
+    fun la_empresa_se_registra() {
         val saveEmpresa = "$EMPRESA_URL/register"
         response = restTemplate.postForEntity(saveEmpresa, empresa, Empresa::class.java)
     }
