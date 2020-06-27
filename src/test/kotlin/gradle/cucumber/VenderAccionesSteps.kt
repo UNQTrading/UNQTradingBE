@@ -66,6 +66,7 @@ class VenderAccionesSteps {
 
     @Then("el monto se ve reflejado en saldo de la empresa")
     fun el_monto_se_ve_reflejado_en_saldo_de_la_empresa() {
-        Assert.assertEquals(ordenResult.precio, empresa.saldo)
+
+        Assert.assertEquals(ordenResult.precio, accion!!.empresa.saldo)
     }
 }

@@ -16,6 +16,7 @@ class UsuarioService : IUsuarioService {
     @Autowired lateinit var ordenService: OrdenDeVentaService
     @Autowired lateinit var accionRepository: AccionRepository
     @Autowired lateinit var usuarioValidator: UsuarioValidator
+    @Autowired lateinit var empresaService: EmpresaService
 
     override fun save(usuario: Usuario) : Usuario {
         usuarioValidator.validate(usuario)
@@ -26,6 +27,7 @@ class UsuarioService : IUsuarioService {
         var usuario: Usuario = findById(usuarioId)
         var orden = ordenService.findById(ordenId)
         var accion = usuario.buy(orden)
+        accion.empresa = empresaService.sell(orden)
         usuarioRepository.save(usuario)
         return accion
     }
