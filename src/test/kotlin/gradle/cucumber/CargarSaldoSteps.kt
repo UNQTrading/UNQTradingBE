@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder
 @CucumberOptions(features = ["src/test/resources"])
 class CargarSaldoSteps {
 
-    var restTemplate = RestTemplate(HttpComponentsClientHttpRequestFactory())
+    var restTemplate = RestTemplate()
     val CARGAR_SALDO_URL = "http://localhost:8080/api/usuario/cargarSaldo"
     val FIND_USUARIO_URL = "http://localhost:8080/api/usuario/find"
     lateinit var response: ResponseEntity<Usuario>
@@ -36,7 +36,7 @@ class CargarSaldoSteps {
         val builder = UriComponentsBuilder.fromUriString(CARGAR_SALDO_URL)
                 .queryParam("dni", dni)
                 .queryParam("saldo", saldo)
-        restTemplate.patchForObject(builder.toUriString(), null, Void::class.java)
+        restTemplate.postForObject(builder.toUriString(), null, Void::class.java)
     }
 
     @Then("los {int} pesos fueron cargados a su cuenta")
