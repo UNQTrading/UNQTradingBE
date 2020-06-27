@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class OrdenDeVentaService : IOrdenDeVentaService {
@@ -34,12 +35,11 @@ class OrdenDeVentaService : IOrdenDeVentaService {
         orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)!!
 
         //TODO: acomodar esto
-        var creador : Usuario? = personaRepository.findById(ordenDeVenta.creadorId!!).get()
-        if (creador == null){
-            creador = empresaRepository.findById(ordenDeVenta.creadorId!!).get()
+        var creador = personaRepository.findById(ordenDeVenta.creadorId!!)
+        if (!creador.isPresent){
+            orden.creador = empresaRepository.findById(ordenDeVenta.creadorId!!).get()
         }
 
-        orden.creador = creador
         ordenDeVentaValidator.validate(orden)
         return ordenDeVentaRepository.save(orden)
     }

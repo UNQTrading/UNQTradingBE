@@ -63,7 +63,7 @@ class VenderAccionesSteps {
         accion = restTemplate.postForObject(comprar,usuario, Accion::class.java) as Accion
     }
 
-    @Then("el monto se ve reflejado en saldo de la empresa")
+    @Then("el monto se ve reflejado en saldo del vendedor")
     fun el_monto_se_ve_reflejado_en_saldo_de_la_empresa() {
 
         Assert.assertEquals(ordenResult.precio, ordenResult.creador.saldo)

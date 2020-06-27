@@ -14,7 +14,6 @@ class OrdenDeVenta() {
     lateinit var empresa: Empresa
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
-
     @ManyToOne
     lateinit var creador : Usuario
     @JsonFormat(pattern = "yyyy-MM-dd")
