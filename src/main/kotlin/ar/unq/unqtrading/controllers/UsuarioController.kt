@@ -44,4 +44,8 @@ class UsuarioController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun login(@RequestParam dni: Long, @RequestParam username: String, @RequestParam password: String) = usuarioService.login(dni, username, password)
+
+    @PostMapping(value = ["/cargarSaldo"])
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun cargarSaldo(@RequestParam dni: Long, @RequestParam saldo: Int) = usuarioService.cargarSaldo(dni, saldo)
 }
