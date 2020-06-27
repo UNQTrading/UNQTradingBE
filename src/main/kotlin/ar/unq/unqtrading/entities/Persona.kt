@@ -6,7 +6,7 @@ import javax.persistence.*
 import java.time.LocalDate
 
 @Entity
-class Persona() {
+class Persona() : Usuario() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
@@ -35,7 +35,7 @@ class Persona() {
     @JsonIgnore
     @OneToMany(mappedBy = "persona", cascade = [CascadeType.ALL])
     var acciones: MutableSet<Accion> = mutableSetOf()
-    var saldo: Int = 0
+    override var saldo: Int = 0
 
     fun buy(orden: OrdenDeVenta) : Accion{
         var accion = Accion(orden.cantidadDeAcciones, orden.empresa, this, LocalDate.now())

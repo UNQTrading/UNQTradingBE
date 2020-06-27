@@ -9,6 +9,6 @@ interface IPersonaService {
     fun save(persona: Persona): Persona
     fun buy(ordenId: Int, usuarioId: Int): Accion
     fun findById(personaId: Int): Persona
-    fun findAcciones(usuarioId: Int): List<Accion>
+    fun findAcciones(personaId: Int): List<Accion>
     fun login(dni: Long, username: String, password: String): Persona
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @Entity
-class Empresa() {
+class Empresa() : Usuario()  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
@@ -15,7 +15,7 @@ class Empresa() {
     lateinit var password: String
     @Column(unique = true)
     var cuit: Long = 0
-    var saldo: Int = 0
+    override var saldo: Int = 0
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

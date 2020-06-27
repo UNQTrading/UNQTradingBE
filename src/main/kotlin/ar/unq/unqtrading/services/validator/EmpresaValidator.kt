@@ -36,7 +36,7 @@ class EmpresaValidator {
         }
     }
     private fun validateCuit(cuit: Long) {
-        if ("$cuit".length !== 11) {
+        if ("$cuit".length != 11) {
             throw CuitInvalidoException("El cuit debe tener 11 dígitos")
         }
     }
