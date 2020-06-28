@@ -48,5 +48,9 @@ class PersonaController {
     @PostMapping(value = ["/cargarSaldo"])
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun cargarSaldo(@RequestParam dni: Long, @RequestParam saldo: Int) = personaService.cargarSaldo(dni, saldo)
-}
 
+    @GetMapping(value = ["/obtenerSaldo"])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    fun findSaldo(@RequestParam usuarioId: Int) : Int = personaService.findSaldo(usuarioId)
+}

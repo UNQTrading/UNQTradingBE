@@ -53,4 +53,9 @@ class PersonaService : IPersonaService {
         usuarioValidator.validateSaldo(saldo)
         personaRepository.updateSaldo(dni, saldo)
     }
+
+    override fun findSaldo(usuarioId: Int): Int {
+        val persona = personaRepository.findById(usuarioId)
+        return persona.get().saldo
+    }
 }

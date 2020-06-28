@@ -25,4 +25,9 @@ class EmpresaService : IEmpresaService {
         empresaValidator.validateLogin(cuit, password, empresa)
         return empresa!!
     }
+
+    override fun findSaldo(usuarioId: Int): Int {
+        val empresa = empresaRepository.findById(usuarioId)
+        return empresa.get().saldo
+    }
 }
