@@ -48,4 +48,9 @@ class UsuarioController {
     @PostMapping(value = ["/cargarSaldo"])
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun cargarSaldo(@RequestParam dni: Long, @RequestParam saldo: Int) = usuarioService.cargarSaldo(dni, saldo)
+
+    @GetMapping(value = ["/obtenerSaldo"])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    fun findSaldo(@RequestParam usuarioId: Int) : Int = usuarioService.findSaldo(usuarioId)
 }

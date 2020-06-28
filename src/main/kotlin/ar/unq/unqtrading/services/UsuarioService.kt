@@ -49,4 +49,9 @@ class UsuarioService : IUsuarioService {
         usuarioValidator.validateSaldo(saldo)
         usuarioRepository.updateSaldo(dni, saldo)
     }
+
+    override fun findSaldo(usuarioId: Int): Int {
+        val usuario = usuarioRepository.findById(usuarioId)
+        return usuario.get().saldo
+    }
 }
