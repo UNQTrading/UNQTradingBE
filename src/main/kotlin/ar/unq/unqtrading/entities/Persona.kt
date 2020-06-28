@@ -8,7 +8,6 @@ import javax.persistence.*
 import java.time.LocalDate
 
 @Entity
-@DiscriminatorValue("Persona")
 @JsonTypeName("Persona")
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

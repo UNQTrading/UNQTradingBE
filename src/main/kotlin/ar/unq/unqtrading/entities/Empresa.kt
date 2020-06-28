@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import javax.persistence.*
 
 @Entity
-@DiscriminatorValue("Empresa")
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
