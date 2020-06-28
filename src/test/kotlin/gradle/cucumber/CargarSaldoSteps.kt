@@ -21,7 +21,7 @@ class CargarSaldoSteps {
 
     var restTemplate = RestTemplate()
     val CARGAR_SALDO_URL = "http://localhost:8080/api/usuario/cargarSaldo"
-    val FIND_USUARIO_URL = "http://localhost:8080/api/usuario/find"
+    val FIND_SALDO_URL = "http://localhost:8080/api/usuario/obtenerSaldo"
     lateinit var response: ResponseEntity<Usuario>
     @Autowired
     lateinit var dataService: DataService
@@ -41,9 +41,9 @@ class CargarSaldoSteps {
 
     @Then("los {int} pesos fueron cargados a su cuenta")
     fun assertSaldo(saldo: Int) {
-        val builder = UriComponentsBuilder.fromUriString(FIND_USUARIO_URL)
+        val builder = UriComponentsBuilder.fromUriString(FIND_SALDO_URL)
                 .queryParam("usuarioId", 1)
         response = restTemplate.getForEntity(builder.toUriString(), Usuario::class.java)
-        assertEquals(saldo, response.body!!.saldo)
+        assertEquals(saldo, response.body)
     }
 }

@@ -22,4 +22,9 @@ class EmpresaController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun login(@RequestParam cuit: Long, @RequestParam password: String) = empresaService.login(cuit, password)
+
+    @GetMapping(value = ["/obtenerSaldo"])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    fun findSaldo(@RequestParam usuarioId: Int) : Int = empresaService.findSaldo(usuarioId)
 }
