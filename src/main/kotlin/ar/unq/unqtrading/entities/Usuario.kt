@@ -22,7 +22,6 @@ abstract class Usuario () {
 
     @Column(nullable = false)
     open var saldo: Int = 0
-
-    @JsonIgnore
+    
     open var type: String = this.javaClass.simpleName
 }
