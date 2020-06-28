@@ -30,6 +30,9 @@ class OrdenDeVentaService : IOrdenDeVentaService {
     lateinit var personaRepository: PersonaRepository
 
     override fun findAllByNombreEmpresa(nombreEmpresa: String): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByEmpresaNombreEmpresa(nombreEmpresa)
+
+    override fun findAllByCreadorId(creadorId: Int): List<OrdenDeVenta> = ordenDeVentaRepository.findAllByCreadorId(creadorId)
+
     override fun saveOrdenDeVenta(ordenDeVenta: OrdenDeVentaDTO): OrdenDeVenta {
         var orden = ordenDeVenta.toModel()
         orden.empresa = empresaRepository.findByNombreEmpresa(ordenDeVenta.nombreEmpresa)!!

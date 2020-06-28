@@ -1,10 +1,15 @@
 package ar.unq.unqtrading.entities
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import javax.persistence.*
 
 @Entity
 @DiscriminatorValue("Empresa")
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        defaultImpl=Empresa::class)
 class Empresa() : Usuario()  {
 
     @Column(name = "nombre_empresa", unique = true)

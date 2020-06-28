@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface OrdenDeVentaRepository : JpaRepository<OrdenDeVenta, Int> {
     fun findAllByEmpresaNombreEmpresa(@Param("nombreEmpresa") nombreEmpresa: String): List<OrdenDeVenta>
+    fun findAllByCreadorId(@Param("creadorId") creadorId: Int): List<OrdenDeVenta>
 }
