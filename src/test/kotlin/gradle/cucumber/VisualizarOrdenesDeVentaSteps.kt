@@ -31,18 +31,20 @@ class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
         empresaEntity.email = "test@test.com"
         empresaEntity.cuit = 12345
         empresaEntity.password = "123124"
-        restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
+        empresaEntity = restTemplate.postForObject(saveEmpresa, empresaEntity, Empresa::class.java) as Empresa
 
         orden1.nombreEmpresa = nombre
         orden1.cantidadDeAcciones = 1000
         orden1.precio = 500
         orden1.fechaDeCreacion = LocalDate.now()
         orden1.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
+        orden1.creadorId = empresaEntity.id
         orden2.nombreEmpresa = nombre
         orden2.cantidadDeAcciones = 1000
         orden2.precio = 500
         orden2.fechaDeCreacion = LocalDate.now()
         orden2.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
+        orden2.creadorId = empresaEntity.id
         restTemplate.postForObject(url, orden1, OrdenDeVenta::class.java)!!
         restTemplate.postForObject(url, orden2, OrdenDeVenta::class.java)!!
     }
@@ -61,12 +63,21 @@ class VisualizarOrdenesDeVentaSteps : SpringIntegrationTest(){
 
     @Given("una empresa con nombre {string}")
     fun crearOrdenDeVenta(nombre: String) {
+
+        var empresa = Empresa()
+        empresa.nombreEmpresa = "nombreDeEmpresa"
+        empresa.email = "mailDeEmpresa@test.com"
+        empresa.cuit = 12345645600
+        empresa.password = "123124"
+        empresa = restTemplate.postForObject("$EMPRESA_URL/register", empresa, Empresa::class.java) as Empresa
+
         orden1 = OrdenDeVentaDTO()
         orden1.nombreEmpresa = nombre
         orden1.cantidadDeAcciones = 1000
         orden1.precio = 500
         orden1.fechaDeCreacion = LocalDate.now()
         orden1.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
+        orden1.creadorId = empresa.id
     }
 
     @When("creo una orden de venta")

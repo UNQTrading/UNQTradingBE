@@ -13,14 +13,14 @@ class Accion(){
     @ManyToOne
     lateinit var empresa: Empresa
     @ManyToOne(cascade = [CascadeType.ALL])
-    lateinit var usuario: Usuario
+    lateinit var persona: Persona
     @JsonFormat(pattern = "yyyy-MM-dd")
     lateinit var fechaUltimaCompra: LocalDate
 
-    constructor(cantidad: Int, empresa: Empresa, usuario: Usuario, ultimaCompra: LocalDate) : this() {
+    constructor(cantidad: Int, empresa: Empresa, persona: Persona, ultimaCompra: LocalDate) : this() {
         this.cantidad = cantidad
         this.empresa = empresa
-        this.usuario = usuario
+        this.persona = persona
         this.fechaUltimaCompra = ultimaCompra
     }
 
@@ -31,14 +31,14 @@ class Accion(){
         other as Accion
 
         if (empresa != other.empresa) return false
-        if (usuario != other.usuario) return false
+        if (persona != other.persona) return false
 
         return true
     }
 
     override fun hashCode(): Int {
         var result = empresa.hashCode()
-        result = 31 * result + usuario.hashCode()
+        result = 31 * result + persona.hashCode()
         return result
     }
 

@@ -27,6 +27,7 @@ class OrdenDeVentaIntegrationTest {
         ordenCocaCola.precio = 500
         ordenCocaCola.fechaDeCreacion = LocalDate.now()
         ordenCocaCola.fechaDeVencimiento = LocalDate.of(2020, 7, 25)
+        ordenCocaCola.creadorId = dataService.getIdEmpresaByNombre(ordenCocaCola.nombreEmpresa)
     }
 
     @AfterEach

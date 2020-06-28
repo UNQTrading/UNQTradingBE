@@ -1,13 +1,16 @@
 package ar.unq.unqtrading.entities
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import javax.persistence.*
 
 @Entity
-class Empresa() {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        defaultImpl=Empresa::class)
+class Empresa() : Usuario()  {
+
     @Column(name = "nombre_empresa", unique = true)
     lateinit var nombreEmpresa: String
     @Column(unique = true)
@@ -15,6 +18,7 @@ class Empresa() {
     lateinit var password: String
     @Column(unique = true)
     var cuit: Long = 0
+    override var saldo: Int = 0
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

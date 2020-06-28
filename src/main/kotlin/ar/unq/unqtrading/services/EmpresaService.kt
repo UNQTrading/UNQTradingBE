@@ -1,6 +1,7 @@
 package ar.unq.unqtrading.services
 
 import ar.unq.unqtrading.entities.Empresa
+import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.repositories.EmpresaRepository
 import ar.unq.unqtrading.services.interfaces.IEmpresaService
 import ar.unq.unqtrading.services.validator.EmpresaValidator
@@ -25,4 +26,8 @@ class EmpresaService : IEmpresaService {
         return empresa!!
     }
 
+    override fun findSaldo(usuarioId: Int): Int {
+        val empresa = empresaRepository.findById(usuarioId)
+        return empresa.get().saldo
+    }
 }
