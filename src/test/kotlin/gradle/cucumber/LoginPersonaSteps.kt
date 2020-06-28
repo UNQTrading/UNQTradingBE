@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RunWith(Cucumber::class)
 @CucumberOptions(features = ["src/test/resources"])
-class LoginUsuarioSteps {
+class LoginPersonaSteps {
 
     var restTemplate = RestTemplate()
     val LOGIN_PERSONA_URL = "http://localhost:8080/api/usuario/login"
@@ -23,7 +23,7 @@ class LoginUsuarioSteps {
     lateinit var dataService: DataService
     lateinit var response: ResponseEntity<Void>
 
-    @Given("el usuario Fede previamente registrado")
+    @Given("la persona Fede previamente registrado")
     fun runDataService() {
         dataService.crearDatos()
     }

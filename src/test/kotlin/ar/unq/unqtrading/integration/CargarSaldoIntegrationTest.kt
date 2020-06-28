@@ -1,8 +1,8 @@
 package ar.unq.unqtrading.integration
 
 import ar.unq.unqtrading.DataService
-import ar.unq.unqtrading.repositories.UsuarioRepository
-import ar.unq.unqtrading.services.UsuarioService
+import ar.unq.unqtrading.repositories.PersonaRepository
+import ar.unq.unqtrading.services.PersonaService
 import ar.unq.unqtrading.services.exceptions.SaldoCeroONegativoException
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -17,9 +17,9 @@ class CargarSaldoIntegrationTest {
     @Autowired
     lateinit var dataService: DataService
     @Autowired
-    lateinit var usuarioService: UsuarioService
+    lateinit var personaService: PersonaService
     @Autowired
-    lateinit var usuarioRepository: UsuarioRepository
+    lateinit var personaRepository: PersonaRepository
 
     @BeforeEach
     fun init() {
@@ -33,15 +33,15 @@ class CargarSaldoIntegrationTest {
 
     @Test
     fun cargarSaldoTest() {
-        var usuario = usuarioRepository.findByDni(12345678)
+        var usuario = personaRepository.findByDni(12345678)
         assertTrue(usuario!!.saldo == 0)
-        usuarioService.cargarSaldo(12345678, 100)
-        usuario = usuarioRepository.findByDni(12345678)
+        personaService.cargarSaldo(12345678, 100)
+        usuario = personaRepository.findByDni(12345678)
         assertTrue(usuario!!.saldo == 100)
     }
 
     @Test
     fun cargarSaldoNegativoTest() {
-        assertThrows<SaldoCeroONegativoException> { usuarioService.cargarSaldo(12345678, -50) }
+        assertThrows<SaldoCeroONegativoException> { personaService.cargarSaldo(12345678, -50) }
     }
 }

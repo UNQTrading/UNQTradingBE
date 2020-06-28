@@ -18,7 +18,7 @@ import java.time.LocalDate
 
 @RunWith(Cucumber::class)
 @CucumberOptions(features = ["src/test/resources"])
-class ComprarAccionesSteps {
+class VenderAccionesSteps {
     var restTemplate = RestTemplate()
     val DEFAULT_URL = "http://localhost:8080/api/venta"
     val USUARIO_URL = "http://localhost:8080/api/usuario"
@@ -26,30 +26,32 @@ class ComprarAccionesSteps {
     var usuario = Persona()
     var accion: Accion? = null
     var ordenResult = OrdenDeVenta()
-    @Given("una orden de venta con {int} acciones de la empresa {string}")
-    fun una_orden_de_venta_con_acciones_de_la_empresa(cantidad: Int, nombre: String) {
+    var empresa = Empresa()
+    @Given("una orden de venta con {int} acciones y precio {int} de la empresa {string}")
+    fun una_orden_de_venta_con_acciones_de_la_empresa(cantidad: Int, precio: Int, nombre: String) {
         val url = "$DEFAULT_URL/save"
         val saveEmpresa = "$EMPRESA_URL/register"
         var orden = OrdenDeVentaDTO()
         var empresa = Empresa()
-        empresa.nombreEmpresa = "UNQ"
-        empresa.email = "test@test.com"
-        empresa.cuit = 12345
-        empresa.password = "123124"
+        empresa.nombreEmpresa = nombre
+        empresa.email = "$nombre@test.com"
+        empresa.cuit = 12345678911
+        empresa.password = "123123"
+        empresa.saldo = 0
         orden.nombreEmpresa = nombre
         orden.cantidadDeAcciones = cantidad
         orden.fechaDeVencimiento = LocalDate.of(2025, 7, 25)
-        orden.precio = 10
+        orden.precio = precio
         empresa = restTemplate.postForObject(saveEmpresa, empresa, Empresa::class.java) as Empresa
         orden.creadorId = empresa.id
         ordenResult = restTemplate.postForObject(url, orden, OrdenDeVenta::class.java) as OrdenDeVenta
     }
 
-    @When("una persona con nombre {string} compra la orden")
-    fun una_persona_con_nombre_compra_la_orden(nombre: String) {
+    @When("una persona con saldo suficiente compra la orden")
+    fun una_persona_con_nombre_compra_la_orden() {
         val save = "$USUARIO_URL/save"
-        usuario.nombre = nombre
-        usuario.saldo = 1000
+        usuario.nombre = "persona"
+        usuario.saldo = ordenResult.precio
         usuario.apellido = "apellido"
         usuario.cuil = 11111111111
         usuario.dni = 38533749
@@ -61,8 +63,10 @@ class ComprarAccionesSteps {
         accion = restTemplate.postForObject(comprar,usuario, Accion::class.java) as Accion
     }
 
-    @Then("la persona debe tener esa orden en su cuenta")
-    fun el_usuario_debe_tener_esa_orden_en_su_cuenta() {
-        Assert.assertEquals(usuario.id, accion!!.persona.id)
+    @Then("el monto se ve reflejado en saldo del vendedor")
+    fun el_monto_se_ve_reflejado_en_saldo_de_la_empresa() {
+        var orden = restTemplate.getForObject("$DEFAULT_URL/find?ordenId=${ordenResult.id}", OrdenDeVenta::class.java)
+
+        Assert.assertEquals(ordenResult.precio, orden?.creador?.saldo)
     }
 }
