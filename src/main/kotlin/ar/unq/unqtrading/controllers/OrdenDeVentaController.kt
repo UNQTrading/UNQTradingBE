@@ -20,6 +20,11 @@ class OrdenDeVentaController {
     @ResponseStatus(value = HttpStatus.OK)
     fun findAllByNombreEmpresa(@RequestParam nombreEmpresa: String) = ordenDeVentaService.findAllByNombreEmpresa(nombreEmpresa)
 
+    @GetMapping(value = ["/usuario/all"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    fun findAllByCreadorId(@RequestParam creadorId: Int) = ordenDeVentaService.findAllByCreadorId(creadorId)
+
     @PostMapping(value = ["/save"], consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseBody
     @ResponseStatus(value = HttpStatus.CREATED)
