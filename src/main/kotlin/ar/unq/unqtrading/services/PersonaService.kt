@@ -48,4 +48,9 @@ class PersonaService : IPersonaService {
         usuarioValidator.validateLogin(dni, username, password, usuario)
         return usuario!!
     }
+
+    override fun cargarSaldo(dni: Long, saldo: Int) {
+        usuarioValidator.validateSaldo(saldo)
+        personaRepository.updateSaldo(dni, saldo)
+    }
 }

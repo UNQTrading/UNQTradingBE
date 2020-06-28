@@ -44,4 +44,9 @@ class PersonaController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     fun login(@RequestParam dni: Long, @RequestParam username: String, @RequestParam password: String) = personaService.login(dni, username, password)
+
+    @PostMapping(value = ["/cargarSaldo"])
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun cargarSaldo(@RequestParam dni: Long, @RequestParam saldo: Int) = personaService.cargarSaldo(dni, saldo)
 }
+

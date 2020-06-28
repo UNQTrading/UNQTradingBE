@@ -38,6 +38,11 @@ class UsuarioValidator {
         }
     }
 
+    fun validateSaldo(saldo: Int) {
+        if (saldo < 1) {
+            throw SaldoCeroONegativoException("El saldo debe ser mayor a 0")
+        }
+    }
 
     private fun validateDni(dni: Long) {
         if ("$dni".length == 0 ) {
