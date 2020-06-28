@@ -1,6 +1,6 @@
 package gradle.cucumber
 
-import ar.unq.unqtrading.entities.Usuario
+import ar.unq.unqtrading.entities.Persona
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -17,25 +17,25 @@ import org.springframework.web.client.RestTemplate
 class RegistrarPersonaSteps {
     var restTemplate = RestTemplate()
     val USUARIO_URL = "http://localhost:8080/api/usuario"
-    lateinit var usuario: Usuario
-    lateinit var response: ResponseEntity<Usuario>
+    lateinit var persona: Persona
+    lateinit var response: ResponseEntity<Persona>
 
     @Given("una persona con nombre: {string} apellido: {string} email: {string} password: {string} dni: {long} username: {string} y cuil: {long}")
     fun una_persona_con_nombre_apellido_email_password_dni_username_y_cuil(nombre: String, apellido: String, email: String, password: String, dni: Long, username: String, cuil: Long) {
-        usuario = Usuario()
-        usuario.nombre = nombre
-        usuario.apellido = apellido
-        usuario.email = email
-        usuario.cuil = cuil
-        usuario.dni = dni
-        usuario.username = username
-        usuario.password = password
+        persona = Persona()
+        persona.nombre = nombre
+        persona.apellido = apellido
+        persona.email = email
+        persona.cuil = cuil
+        persona.dni = dni
+        persona.username = username
+        persona.password = password
     }
 
     @When("la persona se registra")
     fun la_persona_se_registra() {
         val save = "$USUARIO_URL/save"
-        response = restTemplate.postForEntity(save, usuario, Usuario::class.java)
+        response = restTemplate.postForEntity(save, persona, Persona::class.java)
     }
 
     @Then("la persona se guardo en el sistema")

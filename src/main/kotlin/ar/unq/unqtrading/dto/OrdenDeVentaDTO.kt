@@ -9,6 +9,7 @@ class OrdenDeVentaDTO {
     lateinit var nombreEmpresa: String
     var cantidadDeAcciones: Int = 0
     var precio: Int = 0
+    var creadorId: Int? = null
     @JsonFormat(pattern = "yyyy-MM-dd")
     var fechaDeCreacion: LocalDate = LocalDate.now()
     @JsonFormat(pattern = "yyyy-MM-dd")

@@ -1,7 +1,7 @@
 package ar.unq.unqtrading.services.validator
 
-import ar.unq.unqtrading.entities.Usuario
-import ar.unq.unqtrading.repositories.UsuarioRepository
+import ar.unq.unqtrading.entities.Persona
+import ar.unq.unqtrading.repositories.PersonaRepository
 import ar.unq.unqtrading.services.exceptions.*
 import ar.unq.unqtrading.utils.ObjectStructureUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,30 +10,30 @@ import org.springframework.stereotype.Component
 @Component
 class UsuarioValidator {
     @Autowired
-    lateinit var usuarioRepository: UsuarioRepository
+    lateinit var personaRepository: PersonaRepository
 
-    fun validate(usuario: Usuario) {
-        ObjectStructureUtils.checkEmptyAttributes(usuario)
-        if (usuarioRepository.findByDni(usuario.dni) != null) {
-            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el dni ${usuario.dni}")
+    fun validate(persona: Persona) {
+        ObjectStructureUtils.checkEmptyAttributes(persona)
+        if (personaRepository.findByDni(persona.dni) != null) {
+            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el dni ${persona.dni}")
         }
-        if (usuarioRepository.findByCuil(usuario.cuil) != null) {
-            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el cuil ${usuario.cuil}")
+        if (personaRepository.findByCuil(persona.cuil) != null) {
+            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el cuil ${persona.cuil}")
         }
-        if(usuarioRepository.findByEmail(usuario.email) != null ) {
-            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el email ${usuario.email}")
+        if(personaRepository.findByEmail(persona.email) != null ) {
+            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el email ${persona.email}")
         }
-        if(usuarioRepository.findByUsername(usuario.username) != null ) {
-            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el nombre de usuario ${usuario.username}")
+        if(personaRepository.findByUsername(persona.username) != null ) {
+            throw UsuarioYaExistenteException("Ya hay un usuario registrado con el nombre de persona ${persona.username}")
         }
     }
 
-    fun validateLogin(dni: Long, username: String, password: String, usuario: Usuario?) {
+    fun validateLogin(dni: Long, username: String, password: String, persona: Persona?) {
         validateDni(dni)
         validateUsername(username)
         validatePassword(password)
-        if (usuario === null || !usuario.password.contentEquals(password) ||
-                        !usuario.username.contentEquals(username)) {
+        if (persona === null || !persona.password.contentEquals(password) ||
+                        !persona.username.contentEquals(username)) {
             throw LoginFallidoException("Datos ingresados incorrectos")
         }
     }
@@ -52,7 +52,7 @@ class UsuarioValidator {
 
     private fun validateUsername(username: String) {
         if (username.isEmpty()) {
-            throw UsernameInvalidoException("El nombre de usuario no puede estar vacío")
+            throw UsernameInvalidoException("El nombre de persona no puede estar vacío")
         }
     }
 
