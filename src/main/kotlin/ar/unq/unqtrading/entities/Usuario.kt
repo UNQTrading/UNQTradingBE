@@ -8,10 +8,6 @@ import kotlin.reflect.KClass
 @Entity
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "Tipo", discriminatorType = DiscriminatorType.STRING)
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
 @JsonSubTypes(
         JsonSubTypes.Type(value = Persona::class, name = "Persona"),
         JsonSubTypes.Type(value = Empresa::class, name = "Empresa"))
