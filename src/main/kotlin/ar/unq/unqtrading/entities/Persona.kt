@@ -2,11 +2,19 @@ package ar.unq.unqtrading.entities
 
 import ar.unq.unqtrading.entities.exceptions.SaldoInsuficienteException
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+import com.fasterxml.jackson.annotation.JsonTypeName
 import javax.persistence.*
 import java.time.LocalDate
 
 @Entity
 @DiscriminatorValue("Persona")
+@JsonTypeName("Persona")
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "type",
+        defaultImpl=Persona::class)
 class Persona() : Usuario() {
 
     @Column (nullable = false)
