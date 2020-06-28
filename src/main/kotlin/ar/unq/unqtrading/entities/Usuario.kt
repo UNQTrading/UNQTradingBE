@@ -7,7 +7,6 @@ import javax.persistence.*
 
 @Entity
 @Inheritance (strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "Tipo", discriminatorType = DiscriminatorType.STRING)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXISTING_PROPERTY,

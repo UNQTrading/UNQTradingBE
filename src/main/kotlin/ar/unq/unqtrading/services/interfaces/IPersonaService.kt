@@ -12,4 +12,5 @@ interface IPersonaService {
     fun findAcciones(personaId: Int): List<Accion>
     fun login(dni: Long, username: String, password: String): Persona
     fun cargarSaldo(dni: Long, saldo: Int)
+    fun findSaldo(usuarioId: Int): Int
 }
