@@ -49,6 +49,16 @@ class OrdenDeVentaIntegrationTest {
     }
 
     @Test
+    fun saveOrdenDeVentaRepetidaTest() {
+        assertEquals(0, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+        ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola)
+        assertEquals(1, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+        val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
+        assertEquals("Ya existe una orden de venta con esos datos", exception.message)
+        assertEquals(1, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+    }
+
+    @Test
     fun saveOrdenDeVentaAccionesNegativasTest() {
         ordenCocaCola.cantidadDeAcciones = -500
         val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
