@@ -87,6 +87,7 @@ class DataService {
 
     fun eliminarDatos() {
         ordenDeVentaRepository.deleteAll()
+        accionRepository.deleteAll()
         empresaRepository.deleteAll()
         personaRepository.deleteAll()
     }
