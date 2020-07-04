@@ -5,6 +5,7 @@ import ar.unq.unqtrading.entities.Accion
 import ar.unq.unqtrading.entities.Empresa
 import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.entities.Persona
+import ar.unq.unqtrading.services.exceptions.OrdenDeVentaIncorrectaException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
@@ -56,6 +57,7 @@ class VenderAccionesSteps {
     val saveUsuario = "$USUARIO_URL/save"
     var orden = OrdenDeVentaDTO()
     var empresa = Empresa()
+    var accion = Accion()
     empresa.nombreEmpresa = nombre
     empresa.email = "$nombre@test.com"
     empresa.cuit = 12345676611
@@ -74,6 +76,11 @@ class VenderAccionesSteps {
     persona2.email = "persona2@email.com"
     persona2.username = "username2"
     persona2.password = "password"
+    accion.persona = persona2
+    accion.fechaUltimaCompra = LocalDate.now().plusDays(5)
+    accion.cantidad = cantidad
+    accion.empresa = empresa
+    persona2.acciones.add(accion)
     persona2 = restTemplate.postForObject(saveUsuario, persona2, Persona::class.java) as Persona
     orden.creadorId = persona2.id
 
@@ -118,5 +125,19 @@ class VenderAccionesSteps {
         var orden = restTemplate.getForObject("$DEFAULT_URL/find?ordenId=${ordenResult.id}", OrdenDeVenta::class.java)
 
         Assert.assertEquals(ordenResult.precio, orden?.creador?.saldo)
+    }
+
+    @Then("la cantidad se le descuenta a la persona que vendio")
+    fun la_cantidad_se_le_descuenta_a_la_persona_que_vendio() {
+
+        //TODO: Verificar por que al persisitirse la persona las acciones no lo hacen y la lista de acciones de la persona se persiste vacia
+
+        var acciones = restTemplate.getForObject("$USUARIO_URL/acciones?usuarioId=${persona2.id}", List::class.java) as List<Accion>
+        var acciones2 = restTemplate.getForObject("$USUARIO_URL/acciones?usuarioId=${ordenResult.creador.id}", List::class.java) as List<Accion>
+        var acciones3 = persona2.acciones
+
+        Assert.assertFalse(acciones?.any {it.empresa == empresa && it.cantidad != 0}!!)
+        Assert.assertFalse(acciones2?.any {it.empresa == empresa && it.cantidad != 0}!!)
+        Assert.assertFalse(acciones3?.any {it.empresa == empresa && it.cantidad != 0}!!)
     }
 }

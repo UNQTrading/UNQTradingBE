@@ -9,3 +9,4 @@ Feature: Vender acciones
     Given una orden de venta con 10 acciones y precio 100 de la empresa "UNQT2" creada por una persona
     When otra persona con saldo suficiente compra la orden
     Then el monto se ve reflejado en saldo del vendedor
+    Then la cantidad se le descuenta a la persona que vendio
