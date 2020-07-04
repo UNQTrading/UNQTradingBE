@@ -1,6 +1,7 @@
 package ar.unq.unqtrading.services.validator
 
 import ar.unq.unqtrading.entities.OrdenDeVenta
+import ar.unq.unqtrading.repositories.AccionRepository
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
 import ar.unq.unqtrading.services.exceptions.OrdenDeVentaIncorrectaException
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,6 +12,8 @@ import java.time.LocalDate
 class OrdenDeVentaValidator {
     @Autowired
     lateinit var ordenDeVentaRepository: OrdenDeVentaRepository
+    @Autowired
+    lateinit var accionRepository: AccionRepository
 
     fun validate(ordenDeVenta: OrdenDeVenta) {
         if (ordenDeVenta.cantidadDeAcciones < 1) {
@@ -29,6 +32,12 @@ class OrdenDeVentaValidator {
                     it.precio == ordenDeVenta.precio
                 }) {
             throw OrdenDeVentaIncorrectaException("Ya existe una orden de venta con esos datos")
+        }
+        if (accionRepository.findByPersonaId(ordenDeVenta.creador.id).any {
+                    it.empresa == ordenDeVenta.empresa &&
+                    it.cantidad < ordenDeVenta.cantidadDeAcciones
+                }) {
+            throw OrdenDeVentaIncorrectaException("La cantidad debe ser menor a la disponible")
         }
     }
 }
