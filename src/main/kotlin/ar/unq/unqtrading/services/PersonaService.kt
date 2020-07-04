@@ -29,6 +29,16 @@ class PersonaService : IPersonaService {
         var orden = ordenService.findById(ordenId)
         var accion = persona.buy(orden)
         orden.creador.saldo += orden.precio
+
+        var vendedor = personaRepository.findById(orden.creador.id)
+        if (vendedor.isPresent) {
+            var accionVendedor = vendedor.get().acciones.find { accion -> accion.empresa == orden.empresa}
+            if(accionVendedor != null) {
+                accionVendedor.cantidad -= orden.cantidadDeAcciones
+                personaRepository.save(vendedor.get())
+            }
+        }
+
         ordenDeVentaRepository.save(orden)
         personaRepository.save(persona)
         return accion
