@@ -1,6 +1,7 @@
 package ar.unq.unqtrading.services
 
 import ar.unq.unqtrading.entities.Accion
+import ar.unq.unqtrading.entities.OrdenDeVenta
 import ar.unq.unqtrading.entities.Persona
 import ar.unq.unqtrading.repositories.AccionRepository
 import ar.unq.unqtrading.repositories.OrdenDeVentaRepository
@@ -31,17 +32,26 @@ class PersonaService : IPersonaService {
         orden.creador.saldo += orden.precio
 
         var vendedor = personaRepository.findById(orden.creador.id)
-        if (vendedor.isPresent) {
-            var accionVendedor = vendedor.get().acciones.find { accion -> accion.empresa == orden.empresa}
-            if(accionVendedor != null) {
-                accionVendedor.cantidad -= orden.cantidadDeAcciones
-                personaRepository.save(vendedor.get())
-            }
-        }
+        if (vendedor.isPresent)
+            descontarAcciones(vendedor.get(), orden)
 
-        ordenDeVentaRepository.save(orden)
+        //ordenDeVentaRepository.save(orden)
         personaRepository.save(persona)
         return accion
+    }
+
+    private fun descontarAcciones(vendedor: Persona, orden: OrdenDeVenta) {
+        var accionVendedor = vendedor.acciones.find { accion -> accion.empresa == orden.empresa }
+        if (accionVendedor != null) {
+            if (accionVendedor.cantidad != orden.cantidadDeAcciones)
+                accionVendedor.cantidad -= orden.cantidadDeAcciones
+            else {
+                vendedor.acciones.remove(accionVendedor)
+                ordenDeVentaRepository.delete(orden)
+                accionRepository.delete(accionVendedor)
+            }
+            personaRepository.save(vendedor)
+        }
     }
 
     override fun findById(personaId: Int): Persona {
