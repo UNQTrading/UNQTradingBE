@@ -49,6 +49,16 @@ class OrdenDeVentaIntegrationTest {
     }
 
     @Test
+    fun saveOrdenDeVentaRepetidaTest() {
+        assertEquals(0, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+        ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola)
+        assertEquals(1, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+        val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
+        assertEquals("Ya existe una orden de venta con esos datos", exception.message)
+        assertEquals(1, ordenDeVentaService.findAllByNombreEmpresa("Coca-Cola").size)
+    }
+
+    @Test
     fun saveOrdenDeVentaAccionesNegativasTest() {
         ordenCocaCola.cantidadDeAcciones = -500
         val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
@@ -67,6 +77,14 @@ class OrdenDeVentaIntegrationTest {
         ordenCocaCola.fechaDeVencimiento = LocalDate.now().minusDays(1)
         val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
         assertEquals("La fecha debe ser posterior a ${LocalDate.now()}", exception.message)
+    }
+
+    @Test
+    fun saveOrdenDeVentaCantidadInsuficienteTest() {
+        ordenCocaCola.cantidadDeAcciones = 50
+        ordenCocaCola.creadorId = dataService.getIdPersonaByUsername("Fede")
+        val exception = assertThrows<OrdenDeVentaIncorrectaException> { ordenDeVentaService.saveOrdenDeVenta(ordenCocaCola) }
+        assertEquals("La cantidad debe ser menor a la disponible", exception.message)
     }
 
     @Test
